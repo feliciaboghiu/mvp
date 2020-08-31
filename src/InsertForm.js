@@ -26,7 +26,7 @@ class InsertForm extends React.Component {
         return (
             <div>
                 <h2>Insert Form</h2>
-                {/*<form onSubmit={(e) => this.handleSubmit(e)}>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <label>Insert new item
                         <input
                             name="newName"
@@ -36,7 +36,7 @@ class InsertForm extends React.Component {
                         />
                     </label>
                     <button type="submit">Add Item</button>
-        </form>*/}
+                </form>
             </div>
         )
     }

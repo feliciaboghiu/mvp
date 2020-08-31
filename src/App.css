@@ -1,5 +1,7 @@
-.App {
-  width: 400px;
+body {
+  width: 800px;
   margin: 0 auto;
+}
+.App {
   text-align: center;
 }

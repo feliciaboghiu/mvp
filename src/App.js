@@ -18,6 +18,8 @@ const TEST_ITEMS = [
 
 ];
 
+//const VIEW_ITEMS = [ itemlist, additem, addlist ]
+
 
 class App extends React.Component {
   constructor(props) {
@@ -58,44 +60,35 @@ class App extends React.Component {
           <h1>NewVentory</h1>
           <Router>
 
-            <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
-            {/*<button
-              onClick={() => this.changeView(1)}
-            >ITEM LIST</button>*/}
-            <button><NavLink to='/additem' activeClassName='selected'>ADD ITEM</NavLink></button>
-            {/*<button
-              onClick={() => this.changeView(2)}
-            >ADD ITEM</button>*/}
-            <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
-            {/*<button
-              onClick={() => this.changeView(3)}
-            >CREATE NEW LIST</button>*/}
-            {/*{
-              (this.state.view === 1)
-                ? <ItemList items={this.state.items} changeView={isView => this.changeView(isView)} />
+            <button onClick={() => this.changeView(1)}><NavLink to='/' activeClassName='selected'>ITEM LIST</NavLink></button>
+            <button onClick={() => this.changeView(2)}><NavLink to='/additem' activeClassName='selected'>ADD ITEM</NavLink></button>
+            <button onClick={() => this.changeView(3)}><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
+
+              {/*{(this.state.view === itemList)
+                ? <ItemList />
                 : (this.state.view === 2)
                   ? <InsertForm addListItem={newName => this.addListItem(newName)} />
                   : (this.state.view === 3)
                     ? <NewList addNewList={newList => this.addNewList(newList)} changeView={isView => this.changeView(isView)} />
-                    : ''
-
-            }*/}
+                    : ''}*/}
 
             <Switch>
-                
-                  <Route path='/' exact>
-                    <ItemList items={this.state.items} changeView={isView => this.changeView(isView)} />
-                  </Route>
+              {(this.state.view === 1)  
+                ? (<Route path='/'>
+                    <ItemList isView={this.state.view} items={this.state.items} changeView={isView => this.changeView(isView)} />
+                  </Route>)
 
-                  <Route path='/additem'>
-                    <InsertForm />
-                  </Route>
+              : (this.state.view === 2) 
+                ? (<Route path='/additem'>
+                    <InsertForm addListItem={newName => this.addListItem(newName)} />
+                  </Route>)
 
-              <Route path='/addlist'>
-                <NewList />
-              </Route>
+              : (this.state.view === 3) 
+                ? (<Route path='/addlist'>
+                    <NewList />
+                  </Route>)
 
-              <Error404View />
+              : <Error404View />}
             </Switch>
           </Router>
           
