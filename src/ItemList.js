@@ -4,25 +4,27 @@ import React from 'react';
 class ItemList extends React.Component {
     
     render() {
-        {/*let titleJsx = this.props.items.map((t) => <li key={t.title}>{t.title}<button onClick={(e) => this.props.changeView(e)}>Add Item</button><button>Edit List Title</button><button>Delete List</button></li>)
-        let nameJsx = this.props.items.map((i) => <li key={i.name}>{i.name}<button>Edit Item</button><button>Delete Item</button></li>)
-    */}
+        let listJsx = (
+            this.props.items.map((l) =>
+                <li key={l.title}>
+                <h2>{l.title}</h2>
+                <button>Edit List Title</button>
+                <button>Delete List</button>
+                <ul>
+                    {this.props.items.map((n) => 
+                    <li key={n.name}>{n.name}
+                        <button>Edit Item</button>
+                        <button>Delete Item</button>
+                    </li>)}
+                </ul>
+            </li>))
 
         return (
             <div className="itemList">
-                <h1>Item List</h1>
-            {/*    <ul>
-                    <h2>{titleJsx[0]}</h2>
-                    <ul>
-                        {nameJsx[0]}
-                    </ul>
-                </ul>
+                <h2>Item List</h2>
                 <ul>
-                    <h2>{titleJsx[1]}</h2>
-                    <ul>
-                        {nameJsx[1]}
-                    </ul>
-            </ul>*/}
+                    {listJsx}
+                </ul>
             </div>
         )
     }

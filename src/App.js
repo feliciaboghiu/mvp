@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  NavLink
 } from "react-router-dom";
 import Error404View from './Error404View'
 
@@ -56,21 +56,21 @@ class App extends React.Component {
       return (
         <div>
           <h1>NewVentory</h1>
-          <BrowserRouter>
+          <Router>
 
-            <a href='/'>ITEM LIST</a>
-            <button
+            <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
+            {/*<button
               onClick={() => this.changeView(1)}
-            >ITEM LIST</button>
-            <a href='/additem'>ITEM LIST</a>
-            <button
+            >ITEM LIST</button>*/}
+            <button><NavLink to='/additem' activeClassName='selected'>ADD ITEM</NavLink></button>
+            {/*<button
               onClick={() => this.changeView(2)}
-            >ADD ITEM</button>
-            <a href='/addlist'>CREATE NEW LIST</a>
-            <button
+            >ADD ITEM</button>*/}
+            <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
+            {/*<button
               onClick={() => this.changeView(3)}
-            >CREATE NEW LIST</button>
-            {
+            >CREATE NEW LIST</button>*/}
+            {/*{
               (this.state.view === 1)
                 ? <ItemList items={this.state.items} changeView={isView => this.changeView(isView)} />
                 : (this.state.view === 2)
@@ -79,28 +79,25 @@ class App extends React.Component {
                     ? <NewList addNewList={newList => this.addNewList(newList)} changeView={isView => this.changeView(isView)} />
                     : ''
 
-            }
+            }*/}
 
             <Switch>
-              <Route path='/' exact>
-                <ItemList />
-              </Route>
+                
+                  <Route path='/' exact>
+                    <ItemList items={this.state.items} changeView={isView => this.changeView(isView)} />
+                  </Route>
 
-              <Route path='/additem'>
-                <InsertForm />
-              </Route>
+                  <Route path='/additem'>
+                    <InsertForm />
+                  </Route>
 
               <Route path='/addlist'>
                 <NewList />
               </Route>
 
-              <Route path='/additem'>
-                <InsertForm />
-              </Route>
-
               <Error404View />
             </Switch>
-          </BrowserRouter>
+          </Router>
           
         </div>
       )
