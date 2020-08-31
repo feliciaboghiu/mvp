@@ -8,7 +8,7 @@ class InsertForm extends React.Component {
         };
     }
 
-    handleChange = (event) => {
+    /*handleChange = (event) => {
         this.setState({
             newName: event.target.value
         });
@@ -18,14 +18,15 @@ class InsertForm extends React.Component {
         event.preventDefault();
         // Pass the state
         this.props.addListItem(this.state.newName);
-    }
+    }*/
 
     
     render() {
             
         return (
             <div>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
+                <h2>Insert Form</h2>
+                {/*<form onSubmit={(e) => this.handleSubmit(e)}>
                     <label>Insert new item
                         <input
                             name="newName"
@@ -35,7 +36,7 @@ class InsertForm extends React.Component {
                         />
                     </label>
                     <button type="submit">Add Item</button>
-                </form>
+        </form>*/}
             </div>
         )
     }

@@ -3,6 +3,13 @@ import './App.css';
 import ItemList from './ItemList';
 import InsertForm from './InsertForm';
 import NewList from './NewList';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Error404View from './Error404View'
 
 
 const TEST_ITEMS = [
@@ -11,27 +18,22 @@ const TEST_ITEMS = [
 
 ];
 
-//const TEST_LISTS = [
-  //"Albuns"
-//]
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        itemList: 1,
+        view: 1,
         items: TEST_ITEMS, // []
-        // lists: TEST_LISTS
       };
     }
 
 
-  changeView(isItemList) {
-    this.setState({ itemList: isItemList });
+  changeView(isView) {
+    this.setState({ view: isView });
   }
 
-  addListItem = (newName) => {
+  /*addListItem = (newName) => {
     console.log('App.addListItem:', newName);
     newName = this.state.items.name
     this.setState({
@@ -46,7 +48,7 @@ class App extends React.Component {
       lists: [...this.state.lists, newList],
       itemList: 1
     })
-  }
+  }*/
 
 
   render() {
@@ -54,25 +56,51 @@ class App extends React.Component {
       return (
         <div>
           <h1>NewVentory</h1>
-          <button 
-            onClick={() => this.changeView(1)}
-          >ITEM LIST</button>
-          <button 
-          onClick={() => this.changeView(2)}
-          >ADD ITEM</button>
-          <button 
-          onClick={() => this.changeView(3)}
-          >CREATE NEW LIST</button>
-          {
-            (this.state.itemList === 1)
-              ? <ItemList items={this.state.items} changeView={isItemList => this.changeView(isItemList)} /> 
-              : (this.state.itemList === 2)
-              ? <InsertForm addListItem={newName => this.addListItem(newName)} changeView={isItemList => this.changeView(isItemList)} />
-              : (this.state.itemList === 3)
-              ? <NewList addNewList={newList => this.addNewList(newList)} changeView={isItemList => this.changeView(isItemList)} />
-              : ''
-            
-          }
+          <BrowserRouter>
+
+            <a href='/'>ITEM LIST</a>
+            <button
+              onClick={() => this.changeView(1)}
+            >ITEM LIST</button>
+            <a href='/additem'>ITEM LIST</a>
+            <button
+              onClick={() => this.changeView(2)}
+            >ADD ITEM</button>
+            <a href='/addlist'>CREATE NEW LIST</a>
+            <button
+              onClick={() => this.changeView(3)}
+            >CREATE NEW LIST</button>
+            {
+              (this.state.view === 1)
+                ? <ItemList items={this.state.items} changeView={isView => this.changeView(isView)} />
+                : (this.state.view === 2)
+                  ? <InsertForm addListItem={newName => this.addListItem(newName)} />
+                  : (this.state.view === 3)
+                    ? <NewList addNewList={newList => this.addNewList(newList)} changeView={isView => this.changeView(isView)} />
+                    : ''
+
+            }
+
+            <Switch>
+              <Route path='/' exact>
+                <ItemList />
+              </Route>
+
+              <Route path='/additem'>
+                <InsertForm />
+              </Route>
+
+              <Route path='/addlist'>
+                <NewList />
+              </Route>
+
+              <Route path='/additem'>
+                <InsertForm />
+              </Route>
+
+              <Error404View />
+            </Switch>
+          </BrowserRouter>
           
         </div>
       )
