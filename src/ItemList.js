@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 
 class ItemList extends React.Component {
@@ -9,7 +15,7 @@ class ItemList extends React.Component {
             this.props.items.map((l) =>
                 <li key={l.title}>
                     <h2>{l.title}</h2>
-                    <button onClick={() => this.props.changeView(2)}>Add Item</button>
+                    <button><Link to='/additem'>ADD ITEM</Link></button>
                     <button>Edit List Title</button>
                     <button>Delete List</button>
                     <ul>

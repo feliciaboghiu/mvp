@@ -8,17 +8,16 @@ class InsertForm extends React.Component {
         };
     }
 
-    /*handleChange = (event) => {
+    handleChange = (event) => {
         this.setState({
             newName: event.target.value
         });
     };
 
     handleSubmit(event) {
-        event.preventDefault();
         // Pass the state
-        this.props.addListItem(this.state.newName);
-    }*/
+        this.props.addNewItem(this.state.newName);
+    }
 
     
     render() {
