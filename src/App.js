@@ -6,6 +6,7 @@ import NewList from './NewList';
 import { withRouter } from 'react-router';
 import { Switch, Route, Link, NavLink} from "react-router-dom";
 import Error404View from './Error404View'
+import { findAllByAltText } from '@testing-library/react';
 
 
 const TEST_ITEMS = [
@@ -34,26 +35,29 @@ class App extends React.Component {
     super(props);
       this.state = {
         items: TEST_ITEMS, // [],
-        nextitemId: 3
+        newList: '',
+        nextListId: 3
       };
     }
 
-  addNewItem = (newName) => {
+  addNewItem = (name) => {
     console.log('App.addListItem:', newName);
-    newName = this.state.items.name
-    // let indexof = this.state.items.title.indexOf
+    let newName = { name: name };
     this.setState({
-      title: this.state.items.albuns,
-      name: [...this.state.items.name, newName],
+      id: this.state.items.id,
+      title: this.state.items.find(this.state.items.title("Albuns")),
+      name: [...this.state.items.name, newName]
     })
   }
 
-  addNewList = (newList) => {
-    console.log('App.addNewList:', newList);
+  addNewList = (newTitle) => {
+    let newList = {id: this.state.nexListId, title: this.state.title.newTitle, name: ''}
     this.setState({
-      lists: [...this.state.lists, newList],
-      itemList: 1
-    })
+      items: [...this.state.items, newList],
+      nextListId: this.state.newListId + 1
+    });
+    // Redirect to '/'
+    this.props.history.push('/');
   }
 
 
@@ -63,8 +67,7 @@ class App extends React.Component {
         <div>
           <h1>NewVentory</h1>
 
-            <button><Link to='/' activeClassName='selected'>ITEM LIST</Link></button>
-            <button><Link to='/additem' activeClassName='selected'>ADD ITEM</Link></button>
+            <button><Link to='/' exact activeClassName='selected'>ITEM LIST</Link></button>
             <button><Link to='/addlist' activeClassName='selected'>CREATE NEW LIST</Link></button>
 
               {/*{(this.state.view === itemList)
@@ -78,7 +81,7 @@ class App extends React.Component {
             <Switch>  
 
               <Route path='/' exact>
-                <ItemList isView={this.state.view} items={this.state.items} changeView={isView => this.changeView(isView)} />
+                <ItemList items={this.state.items} />
               </Route>
 
               <Route path='/additem'> 
@@ -86,10 +89,11 @@ class App extends React.Component {
               </Route>
 
               <Route path='/addlist'>
-                <NewList />
+                <NewList addNewList={title => this.addNewList(title)}/>
               </Route>
 
               <Error404View />
+
             </Switch>
           
         </div>
