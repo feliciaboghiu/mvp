@@ -9,6 +9,7 @@ import Error404View from './Error404View'
 import { findAllByAltText } from '@testing-library/react';
 
 
+
 const TEST_ITEMS = [
   { id: 1, title: 'Albuns', name: ['Blood Flowers', 'Spice', "Backstreet's back"]},
   { id: 2, title: 'Films', name: ['Good Will Hunting', 'The Royal Tenenbaums', "Matrix"]},
@@ -34,26 +35,42 @@ class App extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        items: TEST_ITEMS, // [],
+        lists: TEST_ITEMS, // [],
         newList: '',
         nextListId: 3
       };
     }
 
-  addNewItem = (name) => {
-    console.log('App.addListItem:', newName);
+  addNewItem = (name, listId) => {
+    console.log('App.addListItem:', name);
     let newName = { name: name };
-    this.setState({
-      id: this.state.items.id,
-      title: this.state.items.find(this.state.items.title("Albuns")),
-      name: [...this.state.items.name, newName]
-    })
+      // find the list
+      let list = this.state.lists.find((l) => l.id === listId)
+      console.log(list)
+      // copy it
+      
+      //this.state.lists
+      // add the new name
+
+      // set state
+      //name: [...this.state.lists.name, newName]
+
+      // Create new array
+        //let newList = [...this.state.lists];
+        
+        // Toggle 'isDone'
+        //newList[ix].isClicked = !newList[ix].isClicked;
+
+        // Update state
+        //this.setState({
+            //lists: newList
+    //})
   }
 
   addNewList = (newTitle) => {
-    let newList = {id: this.state.nexListId, title: this.state.title.newTitle, name: ''}
+    let newList = {id: this.state.nextListId, title: this.state.title.newTitle, name: ''}
     this.setState({
-      items: [...this.state.items, newList],
+      lists: [...this.state.lists, newList],
       nextListId: this.state.newListId + 1
     });
     // Redirect to '/'
@@ -64,7 +81,7 @@ class App extends React.Component {
   render() {
     
       return (
-        <div>
+        <div className="App">
           <h1>NewVentory</h1>
 
             <button><Link to='/' exact activeClassName='selected'>ITEM LIST</Link></button>
@@ -81,11 +98,11 @@ class App extends React.Component {
             <Switch>  
 
               <Route path='/' exact>
-                <ItemList items={this.state.items} />
+                <ItemList lists={this.state.lists} />
               </Route>
 
               <Route path='/additem'> 
-                <InsertForm addListItem={newName => this.addNewItem(newName)} />
+                <InsertForm addNewItem={newName => this.addNewItem(newName)} />
               </Route>
 
               <Route path='/addlist'>

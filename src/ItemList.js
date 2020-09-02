@@ -15,34 +15,37 @@ class ItemList extends React.Component {
             } 
     }
 
-    handleClick(event, item) {
-        console.log(item)
+    showButtons(event, item) {
+        
         // Find index of clicked-on item
-        //let ix = this.props.items.title.findIndex((i) => i.title === item.title);
+        //let ix = this.props.lists.title.findIndex((i) => i.title === item.title);
 
         // Create new array
-        //let newItems = [...this.state.items];
+        //let newList = [...this.state.lists];
         
         // Toggle 'isDone'
-        //newItems[ix].isClicked = !newItems[ix].isClicked;
+        //newList[ix].isClicked = !newList[ix].isClicked;
 
         // Update state
         //this.setState({
-            //items: newItems
+            //lists: newList
         //})
     }
     
     render() {
         
         let listJsx = (
-            this.props.items.map((l) => (
-                <li onClick={(e, i) => this.handleClick(e, i)} key={l.title}>
+            this.props.lists.map((l) => (
+                <li key={l.title}>
                     <div contenteditable="true">
-                        <h2>{l.title}</h2>
+                        <h3>{l.title}</h3>
                     </div>
-                    <button><Link to='/additem'>ADD ITEM</Link></button>
+                    <div className={ this.state.isClicked ? 'display' : 'none'}
+                    onClick={(e, i) => this.showButtons(e, i)}>
+                        <button><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
                     {/*<button>Edit List Title</button>*/}
-                    <button>Delete List</button>
+                        <button>Delete List</button>
+                    </div>
                     <ul>
                         {l.name.map((n) => 
                             <li key={n}>
