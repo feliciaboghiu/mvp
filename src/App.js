@@ -46,7 +46,7 @@ class App extends React.Component {
     let newName = { name: name };
       // find the list
       let id = this.state.lists.find((l) => l.id === listId)
-      alert(listId)
+      alert(name)
       // copy it
       
       //this.state.lists
