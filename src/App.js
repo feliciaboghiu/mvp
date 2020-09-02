@@ -11,7 +11,7 @@ import { findAllByAltText } from '@testing-library/react';
 
 
 const TEST_ITEMS = [
-  { id: 1, title: 'Albuns', name: ['Blood Flowers', 'Spice', "Backstreet's back"]},
+  { id: 1, title: 'Albuns', name: ['The Cure - Blood Flowers', 'Spice Girls - Spice', "Backstreet Boys - Backstreet's back"]},
   { id: 2, title: 'Films', name: ['Good Will Hunting', 'The Royal Tenenbaums', "Matrix"]},
 
 ];
@@ -45,8 +45,8 @@ class App extends React.Component {
     console.log('App.addListItem:', name);
     let newName = { name: name };
       // find the list
-      let list = this.state.lists.find((l) => l.id === listId)
-      console.log(list)
+      let id = this.state.lists.find((l) => l.id === listId)
+      alert(listId)
       // copy it
       
       //this.state.lists
@@ -81,7 +81,7 @@ class App extends React.Component {
   render() {
     
       return (
-        <div className="App">
+        <div className="container">
           <h1>NewVentory</h1>
 
             <button><Link to='/' exact activeClassName='selected'>ITEM LIST</Link></button>
@@ -102,7 +102,7 @@ class App extends React.Component {
               </Route>
 
               <Route path='/additem'> 
-                <InsertForm addNewItem={newName => this.addNewItem(newName)} />
+                <InsertForm addNewItem={newName => this.addNewItem(newName)} id={this.state.lists.id}/>
               </Route>
 
               <Route path='/addlist'>

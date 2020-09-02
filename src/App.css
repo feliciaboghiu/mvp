@@ -5,3 +5,12 @@ body {
 .App {
   text-align: center;
 }
+
+.hide {
+  display: none;
+}
+
+.display {
+  display: block;
+}
+

@@ -31,7 +31,7 @@ class InsertForm extends React.Component {
                             name="newName"
                             type='text'
                             value={this.state.newName}
-                            onChange={e => this.handleChange(e)}
+                            onChange={(e) => this.handleChange(e)}
                         />
                     </label>
                     <button type="submit">Add Item</button>

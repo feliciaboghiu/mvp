@@ -11,11 +11,11 @@ class ItemList extends React.Component {
     constructor(props) {
         super(props);
             this.state = {
-                isClicked: false,
+                isShown: true,
             } 
     }
 
-    showButtons(event, item) {
+    handleClick(event, item) {
         
         // Find index of clicked-on item
         //let ix = this.props.lists.title.findIndex((i) => i.title === item.title);
@@ -40,24 +40,31 @@ class ItemList extends React.Component {
                     <div contenteditable="true">
                         <h3>{l.title}</h3>
                     </div>
-                    <div className={ this.state.isClicked ? 'display' : 'none'}
-                    onClick={(e, i) => this.showButtons(e, i)}>
+                    <div 
+                        className={ this.state.isShown ? 'display' : 'hide'}
+                        onmouseOver={(e, i) => this.handleClick(e, i)}>
                         <button><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
-                    {/*<button>Edit List Title</button>*/}
+                        {/*<button>Edit List Title</button>*/}
                         <button>Delete List</button>
                     </div>
+                    
                     <ul>
                         {l.name.map((n) => 
-                            <li key={n}>
-                                <div contenteditable="true">
-                                    {n}
-                                </div>
-                            {/*<button>Edit Item</button>*/}
-                            <button>Delete Item</button>
-                        </li>)}
-                    </ul>
-                </li>))
-        )   
+                            <div className={ this.state.isShown ? 'underlined' : 'none'}>
+                                <li key={n}>
+                                    <div contenteditable="true">
+                                        {n}
+                                    </div>
+                                    {/*<button>Edit Item</button>*/}
+                                    <button className={ this.state.isShown ? 'display' : 'hide'}>
+                                        Delete Item
+                                    </button>
+                                </li>
+                            </div>)}
+                        </ul>
+                    </li>))
+                    
+        ) 
 
         return (
             <div className="itemList">
