@@ -3,10 +3,8 @@ import './App.css';
 import ItemList from './ItemList';
 import InsertForm from './InsertForm';
 import NewList from './NewList';
-import { withRouter } from 'react-router';
-import { Switch, Route, Link, NavLink} from "react-router-dom";
+import { Switch, Route, NavLink} from "react-router-dom";
 import Error404View from './Error404View'
-import { findAllByAltText } from '@testing-library/react';
 
 
 
@@ -37,24 +35,28 @@ class App extends React.Component {
       this.state = {
         lists: TEST_ITEMS, // [],
         newList: '',
-        nextListId: 3
+        nextListId: 3,
+        editedListId: null
       };
     }
 
-  addNewItem = (name, listId) => {
-    console.log('App.addListItem:', name);
-    let newName = { name: name };
+  addNewItem = (newName, listId) => {
+    // console.log('App.addListItem:', name);
+    //let newName = { name: name };
+    // console.log(name, id)
       // find the list
-      let id = this.state.lists.find((l) => l.id === listId)
-      alert(name)
+      let newList = this.state.lists.find((l) => l.id === listId);
+      console.log(newName, listId);
       // copy it
-      
+      let list = {id: newList.id, title: newList.title, name: [...newList.name, newName]}
+      console.log(list)
+
       //this.state.lists
       // add the new name
-
+      this.setState({lists: [...this.state.lists, list]})
+      console.log(this.state.lists)
       // set state
-      //name: [...this.state.lists.name, newName]
-
+      
       // Create new array
         //let newList = [...this.state.lists];
         
@@ -77,6 +79,9 @@ class App extends React.Component {
     this.props.history.push('/');
   }
 
+  setEditedListId = (editedListId) =>{
+    this.setState({editedListId:editedListId});
+  }
 
   render() {
     
@@ -84,8 +89,8 @@ class App extends React.Component {
         <div className="container">
           <h1>NewVentory</h1>
 
-            <button><Link to='/' exact activeClassName='selected'>ITEM LIST</Link></button>
-            <button><Link to='/addlist' activeClassName='selected'>CREATE NEW LIST</Link></button>
+            <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
+            <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
 
               {/*{(this.state.view === itemList)
                 ? <ItemList />
@@ -98,15 +103,15 @@ class App extends React.Component {
             <Switch>  
 
               <Route path='/' exact>
-                <ItemList lists={this.state.lists} />
+                <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} />
               </Route>
 
               <Route path='/additem'> 
-                <InsertForm addNewItem={newName => this.addNewItem(newName)} id={this.state.lists.id}/>
+                <InsertForm editedListId={this.state.editedListId} newName={this.state.newName} addNewItem={this.addNewItem} id={this.state.lists.id}/>
               </Route>
 
               <Route path='/addlist'>
-                <NewList addNewList={title => this.addNewList(title)}/>
+                <NewList addNewList={title => this.addNewList(title)} />
               </Route>
 
               <Error404View />

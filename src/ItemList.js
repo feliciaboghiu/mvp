@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class ItemList extends React.Component {
@@ -32,18 +27,23 @@ class ItemList extends React.Component {
         //})
     }
     
-    render() {
+    setEditedListId=(id)=>{
+        this.props.setEditedListId(id)
+        console.log("My new ID: ",id)
+        }
+
+     render() {
         
         let listJsx = (
             this.props.lists.map((l) => (
                 <li key={l.title}>
-                    <div contenteditable="true">
+                    <div contentEditable="true">
                         <h3>{l.title}</h3>
                     </div>
                     <div 
                         className={ this.state.isShown ? 'display' : 'hide'}
-                        onmouseOver={(e, i) => this.handleClick(e, i)}>
-                        <button><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
+                        onMouseOver={(e, i) => this.handleClick(e, i)}>
+                        <button onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
                         {/*<button>Edit List Title</button>*/}
                         <button>Delete List</button>
                     </div>
@@ -52,7 +52,7 @@ class ItemList extends React.Component {
                         {l.name.map((n) => 
                             <div className={ this.state.isShown ? 'underlined' : 'none'}>
                                 <li key={n}>
-                                    <div contenteditable="true">
+                                    <div contentEditable="true">
                                         {n}
                                     </div>
                                     {/*<button>Edit Item</button>*/}

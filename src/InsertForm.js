@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class InsertForm extends React.Component {
     constructor(props) {
@@ -14,9 +15,14 @@ class InsertForm extends React.Component {
         });
     };
 
-    handleSubmit(event) {
+
+handleSubmit(event) {
         // Pass the state
-        this.props.addNewItem(this.state.newName);
+        event.preventDefault();
+        
+        //console.log(this.props.match.path);
+      
+        this.props.addNewItem(this.state.newName, this.props.editedListId);
     }
 
     
@@ -41,4 +47,4 @@ class InsertForm extends React.Component {
     }
 }
 
-export default InsertForm;
+export default withRouter(InsertForm);
