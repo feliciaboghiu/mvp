@@ -6,6 +6,7 @@ import NewList from './NewList';
 import { Switch, Route, NavLink} from "react-router-dom";
 import { withRouter, Router } from "react-router";
 import Error404View from './Error404View';
+import DeleteItem from './DeleteItem';
 
 
 
@@ -61,19 +62,9 @@ class App extends React.Component {
       this.setState({lists: newLists})
       
       console.log(this.state.lists)
-      // set state
       
-      // Create new array
-        //let newList = [...this.state.lists];
-        
-        // Toggle 'isDone'
-        //newList[ix].isClicked = !newList[ix].isClicked;
-
-        // Update state
-        //this.setState({
-            //lists: newList
-    //})
-  }
+    }
+  
 
   addNewList = (newTitle) => {
     let newList = {id: this.state.nextListId, title: newTitle, name: []}
@@ -88,6 +79,27 @@ class App extends React.Component {
   setEditedListId = (editedListId) =>{
     this.setState({editedListId:editedListId});
   }
+
+  deleteItem = (listId, name) => {
+    console.log(listId, name)
+    let newLists = [...this.state.lists]
+    let newIx = newLists.findIndex((l) => l.id === listId);
+    //for (let n in )
+    
+  }
+
+  deleteList = (listId) => {
+    let newLists = [...this.state.lists];
+    let newIx = newLists.findIndex((l) => l.id === listId);
+    //let newList = newLists[newIx]
+    let newList = newLists.slice(newIx, (newIx+1))
+    this.setState({lists: newList})
+    console.log(newList)
+  }
+
+  //var array = [1, 2, 3, 4];
+  //var evens = _.remove(array, function(n) { return n % 2 === 0;});
+  //console.log(array);// => [1, 3]console.log(evens);// => [2, 4]
 
   render() {
     
@@ -109,7 +121,7 @@ class App extends React.Component {
             <Switch>  
 
               <Route path='/' exact>
-                <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} />
+                <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} deleteItem={this.deleteItem} deleteList={this.deleteList} />
               </Route>
 
               <Route path='/additem'> 
@@ -119,6 +131,11 @@ class App extends React.Component {
               <Route path='/addlist'>
                 <NewList addNewList={title => this.addNewList(title)} />
               </Route>
+
+              <Route path='/deleteitem'>
+                <DeleteItem editedListId={this.state.editedListId} />
+              </Route>
+
 
               <Error404View />
 

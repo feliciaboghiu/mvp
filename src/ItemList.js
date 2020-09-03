@@ -30,7 +30,20 @@ class ItemList extends React.Component {
     setEditedListId=(id)=>{
         this.props.setEditedListId(id)
         console.log("My new ID: ",id)
-        }
+    }
+
+    handleSubmit(id, name) {
+        //event.preventDefault();
+        //console.log(this.props.match.path);
+        console.log("My new ID: ",id, name)
+        this.props.deleteItem(id, name);
+    }
+
+    handleListDelete(id1, id2) {
+        console.log(id1, id2)
+        //this.props.deleteList(id)
+    }
+
 
      render() {
         
@@ -45,7 +58,7 @@ class ItemList extends React.Component {
                         onMouseOver={(e, i) => this.handleClick(e, i)}>
                         <button onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
                         {/*<button>Edit List Title</button>*/}
-                        <button>Delete List</button>
+                        <button onClick={()=>this.handleListDelete(l.id)}>DELETE LIST</button>
                     </div>
                     
                     <ul>
@@ -56,8 +69,9 @@ class ItemList extends React.Component {
                                         {n}
                                     </div>
                                     {/*<button>Edit Item</button>*/}
-                                    <button className={ this.state.isShown ? 'display' : 'hide'}>
-                                        Delete Item
+                                    <button onClick={(id1, id2)=>this.handleSubmit(l.id, n.id)} 
+                                        className={ this.state.isShown ? 'display' : 'hide'}
+                                    >DELETE ITEM                                        
                                     </button>
                                 </li>
                             </div>)}
@@ -70,9 +84,7 @@ class ItemList extends React.Component {
             <div className="itemList">
                 <h2>Item List</h2>
                 <ul>
-                    
-                        {listJsx}
-                    
+                    {listJsx}
                 </ul>
             </div>
         )
