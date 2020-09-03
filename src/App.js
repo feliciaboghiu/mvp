@@ -4,7 +4,8 @@ import ItemList from './ItemList';
 import InsertForm from './InsertForm';
 import NewList from './NewList';
 import { Switch, Route, NavLink} from "react-router-dom";
-import Error404View from './Error404View'
+import { withRouter, Router } from "react-router";
+import Error404View from './Error404View';
 
 
 
@@ -75,10 +76,10 @@ class App extends React.Component {
   }
 
   addNewList = (newTitle) => {
-    let newList = {id: this.state.nextListId, title: this.state.title.newTitle, name: ''}
+    let newList = {id: this.state.nextListId, title: newTitle, name: []}
     this.setState({
       lists: [...this.state.lists, newList],
-      nextListId: this.state.newListId + 1
+      nextListId: this.state.nextListId + 1
     });
     // Redirect to '/'
     this.props.history.push('/');
@@ -128,4 +129,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

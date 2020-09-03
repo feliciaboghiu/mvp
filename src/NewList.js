@@ -16,6 +16,7 @@ class NewList extends React.Component {
 
 
     handleSubmit2 = (event) => {
+        event.preventDefault();
         // Pass the state
         this.props.addNewList(this.state.newList);
     }
