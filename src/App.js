@@ -45,15 +45,20 @@ class App extends React.Component {
     //let newName = { name: name };
     // console.log(name, id)
       // find the list
-      let newList = this.state.lists.find((l) => l.id === listId);
+      let newLists = [...this.state.lists]
+      let newIx = newLists.findIndex((l) => l.id === listId);
+      let newList = newLists[newIx]
+      newList.name.push(newName)
       console.log(newName, listId);
       // copy it
-      let list = {id: newList.id, title: newList.title, name: [...newList.name, newName]}
-      console.log(list)
+      //let list = {id: newList.id, title: newList.title, name: [...newList.name, newName]}
+      
+      //console.log(list)
 
       //this.state.lists
       // add the new name
-      this.setState({lists: [...this.state.lists, list]})
+      this.setState({lists: newLists})
+      
       console.log(this.state.lists)
       // set state
       
