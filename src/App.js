@@ -81,10 +81,10 @@ class App extends React.Component {
     
   }
 
-  deleteList = (listId) => {
+  deleteList = (listId) => {  
     let newLists = [...this.state.lists];
     let newIx = newLists.findIndex((l) => l.id === listId);
-    newLists.slice(newIx, 1)
+    newLists.splice(newIx, 1)
     this.setState({lists: newLists})
     console.log(newLists)
   }
