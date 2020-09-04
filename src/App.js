@@ -73,25 +73,21 @@ class App extends React.Component {
   }
 
   deleteItem = (listId, name) => {
-    console.log(listId, name)
+    //console.log(listId, name)
     let newLists = [...this.state.lists]
-    let newIx = newLists.findIndex((l) => l.id === listId);
-    //for (let n in )
+    let newList = newLists.find((l) => l.id === listId);
+    newList.name = newList.name.filter((n) => n !== name);
+    this.setState({lists: newLists})
     
   }
 
   deleteList = (listId) => {
     let newLists = [...this.state.lists];
     let newIx = newLists.findIndex((l) => l.id === listId);
-    //let newList = newLists[newIx]
-    let newList = newLists.slice(newIx, (newIx+1))
-    this.setState({lists: newList})
-    console.log(newList)
+    newLists.slice(newIx, 1)
+    this.setState({lists: newLists})
+    console.log(newLists)
   }
-
-  //var array = [1, 2, 3, 4];
-  //var evens = _.remove(array, function(n) { return n % 2 === 0;});
-  //console.log(array);// => [1, 3]console.log(evens);// => [2, 4]
 
   render() {
     
