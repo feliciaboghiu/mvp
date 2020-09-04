@@ -3,60 +3,77 @@ import { render } from '@testing-library/react';
 import { Switch, Route, Link, NavLink} from "react-router-dom";
 
 class EditList extends React.Component {
-
-render() {
-    let listJsx = (
-        this.props.lists.map((l) => (
-            <li key={l.title}>
-                <div>
-                    <h3>{l.title}</h3>
-                </div>
-                <div 
-                    className={ this.state.isShown ? 'display' : 'hide'}
-                    onMouseOver={(e, i) => this.handleClick(e, i)}>
-                    <button onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
-                    {/*<button>Edit List Title</button>*/}
-                    <button><Link to={'/editlist/'+l.id}>EDIT LIST</Link></button>
-                    <button onClick={()=>this.handleListDelete(l.id)}>DELETE LIST</button>
-                </div>
-                
-                <ul>
-                    {l.name.map((n) => (
-                        <div 
-                            className={ this.state.isShown ? 'underlined' : 'none'}>
-                                <li key={n}>
-                                    <div contentEditable="true">
-                                        {n}
-                                    </div>
-                                    {/*<button>Edit Item</button>*/}
-                                    <button onClick={(e, n)=>this.findIx(e, n)} 
-                                        className={ this.state.isShown ? 'display' : 'hide'}
-                                    >DELETE ITEM                                        
-                                    </button>
-                                </li>
-                        </div>))}
-                    </ul>
-                </li>))
-                
-    ) 
-
-    return(
-        <div>
+    constructor(props) {
+        super(props);
+        this.state = {
+            showInput: true,
             
-        
-        return (
-            <div className="itemList">
-                <h2>Item List</h2>
-                <ul>
-                    {listJsx}
-                </ul>
-            </div>
-        )
-
-        </div>
-    )
+        };
     }
 
+    handleChange = (event) => {
+        this.setState({
+            newName: event.target.value
+        });
+    };
+
+    showInput = (event) => {
+       event.preventDefault();
+        let boolean= (this.state.showInput = !this.state.showInput);
+        this.setState({showInput: boolean}) 
+    }
+    
+    
+    render() {
+        let listJsx = (
+            
+            this.props.lists.map((l) => (
+                    <div onClick={(e) => this.showInput(e)} className={ this.props.isShown ? 'show' : 'dontshow'} key={l.title}>
+                        {l.title}
+                    <input
+                        placeholder={l.title}
+                        name={l.title}
+                        type='text'
+                        value={this.state.newName}
+                        onChange={(e) => this.handleChange(e)}
+                    >
+                    </input>
+                    <ul>
+                        {l.name.map((n) => (
+                            <li key={n}>
+                                <input
+                                    placeholder={n}
+                                    name={n}
+                                    type='text'
+                                    value={this.state.newName}
+                                    onChange={e => this.handleChange(e)}
+                                >
+                                </input>
+                            </li>
+                        ))}
+                    </ul>
+                </div>))
+                
+                        )
+            
+        return (
+                <div className="itemList">
+                    <h2>Edit List</h2>
+                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <label>Choose one item to edit:
+                    <ul>
+                        {listJsx}
+                    </ul>
+                        
+                    </label>
+                    <br />
+                    <button type="submit">Edit Field</button>
+                </form>
+
+                    
+                </div>
+        )
+    }
 }
 
 export default EditList;

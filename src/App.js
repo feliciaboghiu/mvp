@@ -6,7 +6,7 @@ import NewList from './NewList';
 import { Switch, Route, NavLink} from "react-router-dom";
 import { withRouter, Router } from "react-router";
 import Error404View from './Error404View';
-import DeleteItem from './DeleteItem';
+import EditList from './EditList';
 
 
 
@@ -16,21 +16,6 @@ const TEST_ITEMS = [
 
 ];
 
-/*if(items.length === 1) {
-  className = one;
-} else if(items.length % 2 === 0) {
-  className = two;
-} else if(items.length % 3 === 0) {
-  className = three;
-} else if(items.length % 5 === 0) {
-  className = five;
-} else if(items.length % 7 === 0) {
-  className = seven;
-}*/
-
-//const VIEW_ITEMS = [ itemlist, additem, addlist ]
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +23,9 @@ class App extends React.Component {
         lists: TEST_ITEMS, // [],
         newList: '',
         nextListId: 3,
-        editedListId: null
+        editedListId: null,
+        list: null,
+        isShown: false
       };
     }
 
@@ -89,13 +76,29 @@ class App extends React.Component {
     console.log(newLists)
   }
 
+  handleEditList(listId) {
+    let newLists = [...this.state.lists]
+    let newIx = newLists.findIndex((l) => l.id === listId);
+    let newList = newLists[newIx]
+    this.setState({list: newList})
+    console.log(newList);
+  }
+
+  showButtons(event) {
+    event.preventDefault();
+    let boolean= (this.state.isShown = !this.state.isShown);
+    this.setState({isShown: boolean}) 
+    }
+  
+  
   render() {
     
       return (
         <div className="container">
           <h1>NewVentory</h1>
-
+    
             <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
+            <button onClick={(e)=>this.showButtons(e)}>SHOW BUTTONS</button>
             <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
 
               {/*{(this.state.view === itemList)
@@ -109,7 +112,7 @@ class App extends React.Component {
             <Switch>  
 
               <Route path='/' exact>
-                <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} deleteItem={this.deleteItem} deleteList={this.deleteList} />
+                <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} deleteItem={this.deleteItem} deleteList={this.deleteList} handleEditList={(i) => this.handleEditList(i)} isShown={this.state.isShown} />
               </Route>
 
               <Route path='/additem'> 
@@ -120,10 +123,9 @@ class App extends React.Component {
                 <NewList addNewList={title => this.addNewList(title)} />
               </Route>
 
-              <Route path='/deleteitem'>
-                <DeleteItem editedListId={this.state.editedListId} />
+              <Route path='/editlist'>
+                <EditList  lists={this.state.lists} list={this.state.list} />
               </Route>
-
 
               <Error404View />
 
