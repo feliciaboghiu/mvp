@@ -7,6 +7,7 @@ import { Switch, Route, NavLink} from "react-router-dom";
 import { withRouter, Router } from "react-router";
 import Error404View from './Error404View';
 import DeleteItem from './DeleteItem';
+import EditList from './EditList';
 
 
 
@@ -48,9 +49,9 @@ class App extends React.Component {
     // console.log(name, id)
       // find the list
       let newLists = [...this.state.lists]
-      let newIx = newLists.findIndex((l) => l.id === listId);
-      let newList = newLists[newIx]
-      newList.name.push(newName)
+      //let newIx = newLists.findIndex((l) => l.id === listId);
+      //let newList = newLists[newIx]
+      //newList.name.push(newName)
       console.log(newName, listId);
       // copy it
       //let list = {id: newList.id, title: newList.title, name: [...newList.name, newName]}
@@ -83,8 +84,9 @@ class App extends React.Component {
   deleteItem = (listId, name) => {
     console.log(listId, name)
     let newLists = [...this.state.lists]
-    let newIx = newLists.findIndex((l) => l.id === listId);
-    //for (let n in )
+    let newList = newLists.find((l) => l.id === listId);
+    newList.name = newList.name.filter((n) => n !== name);
+    this.setState({lists: newLists})
     
   }
 
@@ -92,14 +94,10 @@ class App extends React.Component {
     let newLists = [...this.state.lists];
     let newIx = newLists.findIndex((l) => l.id === listId);
     //let newList = newLists[newIx]
-    let newList = newLists.slice(newIx, (newIx+1))
-    this.setState({lists: newList})
-    console.log(newList)
+    newLists.splice(newIx, 1)
+    this.setState({lists: newLists})
+    console.log(newLists)
   }
-
-  //var array = [1, 2, 3, 4];
-  //var evens = _.remove(array, function(n) { return n % 2 === 0;});
-  //console.log(array);// => [1, 3]console.log(evens);// => [2, 4]
 
   render() {
     
@@ -109,6 +107,8 @@ class App extends React.Component {
 
             <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
             <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
+            <button>SHOW BUTTONS</button>
+            
 
               {/*{(this.state.view === itemList)
                 ? <ItemList />
@@ -125,7 +125,7 @@ class App extends React.Component {
               </Route>
 
               <Route path='/additem'> 
-                <InsertForm editedListId={this.state.editedListId} newName={this.state.newName} addNewItem={this.addNewItem} id={this.state.lists.id}/>
+                <InsertForm editedListId={this.state.editedListId} newName={this.state.newName} addNewItem={this.addNewItem} id={this.state.lists.id} findIx={this.findIx} />
               </Route>
 
               <Route path='/addlist'>
@@ -136,6 +136,9 @@ class App extends React.Component {
                 <DeleteItem editedListId={this.state.editedListId} />
               </Route>
 
+              <Route path='/editlist'>
+                <EditList />
+              </Route>
 
               <Error404View />
 
