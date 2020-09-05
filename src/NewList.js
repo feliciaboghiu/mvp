@@ -1,4 +1,10 @@
 import React from 'react';
+import Form from 'react-bootstrap/Form';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormLabel from 'react-bootstrap/FormLabel';
+import FormControl from 'react-bootstrap/FormLabel';
+import Button from 'react-bootstrap/Button';
+
 
 class NewList extends React.Component {
     constructor(props) {
@@ -24,17 +30,19 @@ class NewList extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={(e) => this.handleSubmit2(e)}>
-                    <label>Insert New List
+                <Form onSubmit={(e) => this.handleSubmit2(e)}>
+                    <FormGroup>
+                    <FormLabel>Insert New List
                         <input
                             name="newList"
                             type='text'
                             value={this.state.newList}
                             onChange={e => this.handleChange2(e)}
                         />
-                    </label>
-                    <button type="submit">Create List</button>
-                </form>
+                    </FormLabel>
+                    <Button variant="info" type="submit">Create List</Button>
+                    </FormGroup>
+                </Form>
             </div>
         )
     }

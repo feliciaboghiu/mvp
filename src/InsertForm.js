@@ -1,5 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormLabel from 'react-bootstrap/FormLabel';
+import FormControl from 'react-bootstrap/FormLabel';
+import Button from 'react-bootstrap/Button';
+
 
 class InsertForm extends React.Component {
     constructor(props) {
@@ -31,17 +37,21 @@ handleSubmit(event) {
         return (
             <div>
                 <h2>Insert Form</h2>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
-                    <label>Insert new item
-                        <input
-                            name="newName"
-                            type='text'
-                            value={this.state.newName}
-                            onChange={(e) => this.handleChange(e)}
-                        />
-                    </label>
-                    <button type="submit">Add Item</button>
-                </form>
+                <Form onSubmit={(e) => this.handleSubmit(e)}>
+                    <FormGroup>
+                        <FormLabel>Insert new item
+                            <FormControl>
+                                <input
+                                name="newName"
+                                type='text'
+                                value={this.state.newName}
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                            </FormControl>
+                        </FormLabel>
+                    <Button variant="info" type="submit">Add Item</Button>
+                    </FormGroup>
+                </Form>
             </div>
         )
     }

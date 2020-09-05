@@ -7,7 +7,6 @@ class EditList extends React.Component {
         super(props);
         this.state = {
             showInput: false,
-            
         };
     }
 

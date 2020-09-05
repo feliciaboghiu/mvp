@@ -7,6 +7,7 @@ import { Switch, Route, NavLink} from "react-router-dom";
 import { withRouter, Router } from "react-router";
 import Error404View from './Error404View';
 import EditList from './EditList';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -97,10 +98,11 @@ class App extends React.Component {
         <div className="container">
           <h1>NewVentory</h1>
     
-            <button><NavLink to='/' exact activeClassName='selected'>ITEM LIST</NavLink></button>
-            <button onClick={(e)=>this.showButtons(e)}>SHOW BUTTONS</button>
-            <button><NavLink to='/addlist' activeClassName='selected'>CREATE NEW LIST</NavLink></button>
-
+          <div className="white">
+            <Button variant="info"><NavLink to='/' exact activeClassName='selected'>Item List</NavLink></Button>
+            <Button variant="info" onClick={(e)=>this.showButtons(e)}>Show Buttons</Button>
+            <Button variant="info"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></Button>
+          </div>
               {/*{(this.state.view === itemList)
                 ? <ItemList />
                 : (this.state.view === 2)
