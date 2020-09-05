@@ -1,6 +1,37 @@
 body {
+  background-image: url(background6.jpg);
+  background-repeat: repeat;
+  background-size: cover;
   margin: 0 auto;
   text-align: center;
+}
+
+.white a {
+  color: white;
+}
+
+.white a:link  {
+  color: green;
+}
+
+.white a:visited  {
+  color: white;
+}
+
+.white a:hover {
+  text-decoration: none;
+}
+.teal a {
+  color: rgb(76, 165, 198);
+}
+
+.teal a:link  {
+  color: teal;
+}
+
+
+.teal a:hover {
+  text-decoration: none;
 }
 
 .hide {

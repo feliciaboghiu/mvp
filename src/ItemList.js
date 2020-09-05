@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {Row, Col} from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
 
 
 class ItemList extends React.Component {
@@ -41,9 +42,11 @@ class ItemList extends React.Component {
                     <div 
                         className={ this.props.isShown ? 'display' : 'hide'}
                     >
-                        <button onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>ADD ITEM</Link></button>
-                        <button onClick={()=>this.props.handleEditList(l.id)}><Link to={'/editlist/'+l.id}>EDIT LIST</Link></button>
-                        <button onClick={()=>this.handleListDelete(l.id)}>DELETE LIST</button>
+                        <div className="teal">
+                            <Button variant="outline-info" onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>Add Item</Link></Button>
+                            <Button variant="outline-info" onClick={()=>this.props.handleEditList(l.id)}><Link to={'/editlist/'+l.id}>Edit List</Link></Button>
+                            <Button variant="outline-info" onClick={()=>this.handleListDelete(l.id)}>Delete List</Button>
+                        </div>
                     </div>
                     
                     <ul>
@@ -54,10 +57,10 @@ class ItemList extends React.Component {
                                         <div contentEditable="true">
                                             {n}
                                         </div>
-                                        <button onClick={(e)=>this.props.deleteItem(l.id, n)}
+                                        <Button variant="outline-info" onClick={(e)=>this.props.deleteItem(l.id, n)}
                                             className={ this.props.isShown ? 'display' : 'hide'}
-                                        >DELETE ITEM                                        
-                                        </button>
+                                        >Delete Item                                        
+                                        </Button>
                                     </li>
                             </div>))}
                         </ul>
