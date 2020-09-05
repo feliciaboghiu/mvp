@@ -125,9 +125,12 @@ class App extends React.Component {
                 <NewList addNewList={title => this.addNewList(title)} />
               </Route>
 
-              <Route path='/editlist'>
-                <EditList  lists={this.state.lists} list={this.state.list} />
-              </Route>
+              <Route path='/editlist/:id' render={
+                (routeProps) => {
+                  let list = this.state.lists.find((l) => l.id == routeProps.match.params.id);
+                  return <EditList list={list} isShown={this.state.isShown}/>
+                }
+              } />
 
               <Error404View />
 

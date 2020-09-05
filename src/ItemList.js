@@ -32,7 +32,7 @@ class ItemList extends React.Component {
                     >
                         <div className="teal">
                             <Button variant="outline-info" onClick={()=>this.setEditedListId(l.id)}><Link to={'/additem/'+l.id}>Add Item</Link></Button>
-                            <Button variant="outline-info" onClick={()=>this.props.handleEditList(l.id)}><Link to={'/editlist/'+l.id}>Edit List</Link></Button>
+                            <Button variant="outline-info"><Link to={'/editlist/'+l.id}>Edit List</Link></Button>
                             <Button variant="outline-info" onClick={()=>this.handleListDelete(l.id)}>Delete List</Button>
                         </div>
                     </div>

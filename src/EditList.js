@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Switch, Route, Link, NavLink} from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 class EditList extends React.Component {
     constructor(props) {
@@ -17,59 +18,53 @@ class EditList extends React.Component {
     };
 
     showInput = (event) => {
+        console.log(this.state.showInput)
        event.preventDefault();
-        let boolean= (this.state.showInput = !this.state.showInput);
+        let boolean = (this.state.showInput = !this.state.showInput);
         this.setState({showInput: boolean}) 
     }
     
     
     render() {
-        let name = this.props.list;
+        let title = this.props.list.title;
         let listJsx = (
-            
-
-            this.props.lists.map((l) => (
-                    <div onClick={(e) => this.showInput(e)} className={ this.props.isShown ? 'show' : 'dontshow'} key={l.title}>
-                        {l.title}
-                    <input
-                        placeholder={l.title}
-                        name={l.title}
-                        type='text'
-                        value={this.state.newName}
-                        onChange={(e) => this.handleChange(e)}
-                    >
-                    </input>
-                    <ul>
-                        {l.name.map((n) => (
-                            <li key={n}>
-                                <input
-                                    placeholder={n}
-                                    name={n}
-                                    type='text'
-                                    value={this.state.newName}
-                                    onChange={e => this.handleChange(e)}
-                                >
-                                </input>
-                            </li>
-                        ))}
-                    </ul>
-                </div>))
-                
-                        )
+            this.props.list.name.map((l) => (
+                <li onClick={(e) => this.showInput(e)} key={l}>
+                    <div className={this.props.isShown ? 'dontshow' : 'show'}>
+                        {l}
+                    </div>
+                    <div className={this.props.isShown ? 'show' : 'dontshow'}>
+                        <input
+                            placeholder={l}
+                            name={l}
+                            type='text'
+                            value={this.state.newName}
+                            onChange={(e) => this.handleChange(e)}
+                        >
+                        </input>
+                    </div>
+                </li>
+            ))
+        );
             
         return (
+
                 <div className="itemList">
                     <h2>Edit List</h2>
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
-                    <label>Choose one item to edit:
+                    <Button variant="info" onClick={(e)=>this.showInput(e)}>Show Input</Button>
+            
+                    {/*<form onSubmit={(e) => this.handleSubmit(e)}>
+                    <label>Choose one item to edit:*/}
+                    <h3>{title}</h3> 
                     <ul>
                         {listJsx}
                     </ul>
-                    <p>{name}</p>    
-                    </label>
-                    <br />
+                       
+                    {/*</label>
+                    <br />*/}
                     <button type="submit">Edit Field</button>
-                </form>
+                    
+                {/*</form>*/}
 
                     
                 </div>
