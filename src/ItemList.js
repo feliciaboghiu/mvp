@@ -25,11 +25,6 @@ class ItemList extends React.Component {
         this.props.deleteList(id)
     }
 
-    /*handleClick(event) {
-        isShow:
-        console.log("Hello")
-    }*/
-
      render() {
         
         let listJsx = (

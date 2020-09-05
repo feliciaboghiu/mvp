@@ -6,7 +6,7 @@ class EditList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showInput: true,
+            showInput: false,
             
         };
     }
@@ -25,8 +25,10 @@ class EditList extends React.Component {
     
     
     render() {
+        let name = this.props.list;
         let listJsx = (
             
+
             this.props.lists.map((l) => (
                     <div onClick={(e) => this.showInput(e)} className={ this.props.isShown ? 'show' : 'dontshow'} key={l.title}>
                         {l.title}
@@ -64,7 +66,7 @@ class EditList extends React.Component {
                     <ul>
                         {listJsx}
                     </ul>
-                        
+                    <p>{name}</p>    
                     </label>
                     <br />
                     <button type="submit">Edit Field</button>
