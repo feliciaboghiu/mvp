@@ -5,13 +5,6 @@ import Button from 'react-bootstrap/Button';
 
 
 class ItemList extends React.Component {
-    constructor(props) {
-        super(props);
-            this.state = {
-                //isShown: false,
-            } 
-    }
-
 
     setEditedListId=(id)=>{
         this.props.setEditedListId(id)
