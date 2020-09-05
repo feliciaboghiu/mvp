@@ -40,7 +40,7 @@ class ItemList extends React.Component {
                     <ul>
                         {l.name.map((n) => (
                             <div 
-                                className={ this.state.isShown ? 'underlined' : 'none'}>
+                                className={ this.props.isShown ? 'underlined' : 'none'}>
                                     <li key={n}>
                                         <div contentEditable="true">
                                             {n}

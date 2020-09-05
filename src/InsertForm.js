@@ -5,6 +5,7 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import FormControl from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
+import NavLink from 'react-bootstrap/NavLink';
 
 
 class InsertForm extends React.Component {
@@ -50,6 +51,9 @@ handleSubmit(event) {
                             </FormControl>
                         </FormLabel>
                     <Button variant="info" type="submit">Add Item</Button>
+                    <br />
+                    <Button variant="info" className="white"><NavLink to={'/'} exact>Go back</NavLink></Button>
+                    
                     </FormGroup>
                 </Form>
             </div>

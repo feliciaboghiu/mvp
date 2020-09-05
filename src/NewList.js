@@ -4,6 +4,7 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import FormControl from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
+import NavLink from 'react-bootstrap/NavLink';
 
 
 class NewList extends React.Component {
@@ -30,6 +31,7 @@ class NewList extends React.Component {
     render() {
         return (
             <div>
+                <h2>Insert List Title</h2>
                 <Form onSubmit={(e) => this.handleSubmit2(e)}>
                     <FormGroup>
                     <FormLabel>Insert New List
@@ -41,8 +43,11 @@ class NewList extends React.Component {
                         />
                     </FormLabel>
                     <Button variant="info" type="submit">Create List</Button>
+                    <br />
+                    <Button variant="info" className="white"><NavLink to={'/'} exact>Go back</NavLink></Button>
                     </FormGroup>
                 </Form>
+                
             </div>
         )
     }

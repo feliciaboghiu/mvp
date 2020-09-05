@@ -11,7 +11,7 @@ body {
 }
 
 .white a:link  {
-  color: green;
+  color: white;
 }
 
 .white a:visited  {
@@ -32,6 +32,7 @@ body {
 
 .teal a:hover {
   text-decoration: none;
+  color: white;
 }
 
 .hide {
