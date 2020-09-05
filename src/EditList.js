@@ -7,19 +7,20 @@ class EditList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showInput: false,
+            showInput: true,
+            newName: ''
         };
     }
-
+    
     handleChange = (event) => {
+
         this.setState({
             newName: event.target.value
         });
+        console.log(this.state.newName)
     };
 
     showInput = (event) => {
-        console.log(this.state.showInput)
-       event.preventDefault();
         let boolean = (this.state.showInput = !this.state.showInput);
         this.setState({showInput: boolean}) 
     }
@@ -29,11 +30,11 @@ class EditList extends React.Component {
         let title = this.props.list.title;
         let listJsx = (
             this.props.list.name.map((l) => (
-                <li onClick={(e) => this.showInput(e)} key={l}>
-                    <div className={this.props.isShown ? 'dontshow' : 'show'}>
+                <li key={l}>
+                    <div className={this.state.showInput ? 'dontshow' : 'show'}>
                         {l}
                     </div>
-                    <div className={this.props.isShown ? 'show' : 'dontshow'}>
+                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
                         <input
                             placeholder={l}
                             name={l}
@@ -50,19 +51,34 @@ class EditList extends React.Component {
         return (
 
                 <div className="itemList">
-                    <h2>Edit List</h2>
-                    <Button variant="info" onClick={(e)=>this.showInput(e)}>Show Input</Button>
-            
+                    <h2>Edit List</h2> 
+                    <Button variant="info" onClick={(e)=>this.showInput(e)}>Show Input Fields</Button>
                     {/*<form onSubmit={(e) => this.handleSubmit(e)}>
                     <label>Choose one item to edit:*/}
-                    <h3>{title}</h3> 
+                    <div className={this.state.showInput ? 'dontshow' : 'show'}>
+                        <h3>
+                            {title}
+                        </h3>
+                    </div>
+                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                        <h3>
+                            <input
+                                placeholder={title}
+                                name={title}
+                                type='text'
+                                value={this.state.newName}
+                                onChange={(e) => this.handleChange(e)}
+                            >
+                            </input>
+                        </h3>
+                    </div>
                     <ul>
                         {listJsx}
                     </ul>
                        
                     {/*</label>
                     <br />*/}
-                    <button type="submit">Edit Field</button>
+                    <Button variant="info" type="submit">Edit Field</Button>
                     
                 {/*</form>*/}
 

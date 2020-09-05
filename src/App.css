@@ -1,10 +1,15 @@
 body {
-  background-image: url(background7.jpg);
+  color: Silver;
+  background-image: url(background9.jpg);
   background-repeat: repeat;
   background-size: cover;
   margin: 0 auto;
   text-align: center;
 }
+
+/*.background {
+  background-color: rgba(255, 255, 255, 0.3);
+}*/
 
 .white a {
   color: white;
