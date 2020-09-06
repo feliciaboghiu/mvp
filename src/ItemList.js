@@ -2,15 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import {Row, Col} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import ContentEditable from 'react-contenteditable'
 
 class ItemList extends React.Component {
-    constructor() {
-        super()
-        this.contentEditable = React.createRef();
-        this.state = {html: "<b>Hello <i>World</i></b>"};
-      };
-
+    
     setEditedListId=(id)=>{
         this.props.setEditedListId(id)
         console.log("My new ID: ",id)
@@ -31,16 +25,14 @@ class ItemList extends React.Component {
                 
                 <Col sm='4' key={l.title}>
                     <div className="background">
-                        <div contentEditable="true">
-                            <h3>{l.title}</h3>
-                        </div>
+                        <h3>{l.title}</h3>
                         <div
                             className={this.props.isShown ? 'display' : 'hide'}
                         >
-                            <div className="teal">
-                                <Button variant="outline-info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
-                                <Button variant="outline-info"><Link to={'/editlist/' + l.id}>Edit List</Link></Button>
-                                <Button variant="outline-info" onClick={() => this.handleListDelete(l.id)}>Delete List</Button>
+                            <div className="white">
+                                <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
+                                <Button variant="info"><Link to={'/editlist/' + l.id}>Edit List</Link></Button>
+                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete List</Button>
                             </div>
                         </div>
 
@@ -49,9 +41,7 @@ class ItemList extends React.Component {
                                 <div
                                     className={this.props.isShown ? 'underlined' : 'none'}>
                                     <li key={n}>
-                                        <div contentEditable="true">
-                                            {n}
-                                        </div>
+                                        {n}
                                         <Button variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
                                             className={this.props.isShown ? 'display' : 'hide'}
                                         >Delete Item

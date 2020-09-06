@@ -90,8 +90,32 @@ class App extends React.Component {
     let boolean= (this.state.isShown = !this.state.isShown);
     this.setState({isShown: boolean}) 
     }
+
+  editTitle(newTitle, listId) {
+    let newLists = [...this.state.lists]
+    let newList = newLists.find((l) => l.id === listId);
+    newList = {id: listId, title: newTitle, name: []};
+    newLists = [...this.state.lists, newList]
+    
+    this.setState({lists: newLists})
+    this.props.history.push('/');
+    
+  }
   
+  editName(newName, listId) {
+    let newLists = [...this.state.lists]
+    let newList = newLists.find((l) => l.id === listId);   
+    let newIx = newList.name.findIndex((n) => n === newName);
+    newList.name[newIx] = newName
+    
+    this.setState({lists: newLists})
+
+    this.props.history.push('/');
+    
+    console.log(this.state.lists);
+  }
   
+
   render() {
     
       return (
@@ -128,7 +152,7 @@ class App extends React.Component {
               <Route path='/editlist/:id' render={
                 (routeProps) => {
                   let list = this.state.lists.find((l) => l.id == routeProps.match.params.id);
-                  return <EditList list={list} isShown={this.state.isShown}/>
+                  return <EditList list={list}  editTitle={(t, i) => this.editTitle(t, i)} editName={(n, i) => this.editName(n, i)} />
                 }
               } />
 
