@@ -12,9 +12,9 @@ import Button from 'react-bootstrap/Button';
 
 
 const TEST_ITEMS = [
-  { id: 1, title: 'Albuns', name: ['The Cure - Blood Flowers', 'Spice Girls - Spice', "Backstreet Boys - Backstreet's back"]},
-  { id: 2, title: 'Films', name: ['Good Will Hunting', 'The Royal Tenenbaums', "Matrix"]},
-
+  { id: 1, title: 'Albums', name: ["The Beatles - Sgt. Pepper' Lonely Hearts Club Band", 'The Beach Boys - Pet Sounds', "The Beatles - Revolver", 'Bob Dylan - Highway 61 Revisited', "Marvin Gaye - What's Going On", 'The Rolling Stones - Exile on Main Street']},
+  { id: 2, title: 'Films', name: ['Good Will Hunting', 'The Royal Tenenbaums', "Matrix", "The Godfather", "Fight Club", "Pulp Fiction"]},
+  { id: 3, title: "Pantry", name: ['Wild Rice', "Black Beans", 'Toilet paper', 'Cat food', 'Condensed Milk']}
 ];
 
 class App extends React.Component {
@@ -91,34 +91,19 @@ class App extends React.Component {
     this.setState({isShown: boolean}) 
     }
 
-  editTitle(newTitle, listId) {
+  saveList(listId, newTitle, newNames) {
     let newLists = [...this.state.lists]
     let newList = newLists.find((l) => l.id === listId);
+    if(newNames) {
+      let newIx = newList.name.findIndex((n) => n === newNames);
+      newList = newList.splice(newIx, 1, newNames);
+    }
     newList = {id: listId, title: newTitle, name: []};
-    newLists = [...this.state.lists, newList]
     
     this.setState({lists: newLists})
     this.props.history.push('/');
     
   }
-  
-  editName(newName, listId) {
-    let newLists = [...this.state.lists]
-    let newList = newLists.find((l) => l.id === listId);   
-    let newIx = newList.name.findIndex((n) => n === newName);
-    newList.name[newIx] = newName
-    
-    this.setState({lists: newLists})
-
-    this.props.history.push('/');
-    
-    console.log(this.state.lists);
-  }
-
-  saveList(id, title, names) {
-    console.log("Hello from App")
-  }
-  
 
   render() {
     
@@ -156,7 +141,8 @@ class App extends React.Component {
               <Route path='/editlist/:id' render={
                 (routeProps) => {
                   let list = this.state.lists.find((l) => l.id == routeProps.match.params.id);
-                  return <EditList list={list}  editTitle={(t, i) => this.editTitle(t, i)} editName={(n, i) => this.editName(n, i)} />
+                  return <EditList list={list}  saveList={(i, t, n) => this.saveList(i, t, n)}
+                  />
                 }
               } />
 

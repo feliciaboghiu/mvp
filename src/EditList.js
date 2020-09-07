@@ -13,9 +13,8 @@ class EditList extends React.Component {
     }
 
     handleTitleChange = (event) => {
-        let{name,value} = event.target;
         this.setState({
-            [name]: value
+            title: event.target.value
         });
     }
 
@@ -52,15 +51,12 @@ class EditList extends React.Component {
                         {n}
                     </div>
                     <div className={this.state.showInput ? 'show' : 'dontshow'}>
-                        <form onSubmit={(e) => this.handleSubmit(e)}>
-                            <input
-                                placeholder={n}
-                                type="text"
-                                name={'name-'+ix}
-                                defaultValue={n}
-                                onChange={(e) => this.handleChange(e)}
-                            />
-                        </form>
+                        <input
+                            type="text"
+                            name={'name-'+ix}
+                            defaultValue={n}
+                            onChange={(e) => this.handleChange(e)}
+                        />
                     </div>
                 </li>
             ))
@@ -80,14 +76,13 @@ class EditList extends React.Component {
                             {title}
                         </h3>
                     </div>
-                        
+                    <form onSubmit={(e) => this.handleSubmit(e)}>    
                         <div className={this.state.showInput ? 'show' : 'dontshow'}>
                             <h3>
                                 <input
-                                    placeholder={title}
-                                    name={title}
+                                    name="title"
                                     type='text'
-                                    value={title}
+                                    value={this.state.title}
                                     onChange={(e) => this.handleTitleChange(e)}
                                 >
                                 </input>
@@ -96,8 +91,8 @@ class EditList extends React.Component {
                         <ul>
                             {listJsx}
                         </ul>
-                        <Button onClick={(e) => this.handleSubmit(e)} variant="info" type="submit">Edit Field</Button>
-                       
+                        <Button variant="info" type="submit">Save Field</Button>
+                    </form>
                                            
                 </div>
         )
