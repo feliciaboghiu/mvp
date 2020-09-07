@@ -19,4 +19,4 @@ My MVP will be called NewVentury and it's an app about Inventory Management.
 - Group Items
 - Change Items from one List to the other
 
-This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
+_This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
