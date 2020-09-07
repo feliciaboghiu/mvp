@@ -7,48 +7,60 @@ class EditList extends React.Component {
         super(props);
         this.state = {
             showInput: false,
+            title: props.list.title
+
         };
     }
-    
+
+    handleTitleChange = (event) => {
+        let{name,value} = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
     handleChange = (event) => {
-        let {name, value} = event.target;
-        this.setState({ [name]: value });
-        //console.log(this.state.title)
+        let { name, value } = event.target;
+        this.setState({ [name]: value });   
     };
 
-    handleTitleSubmit(title, id) {
-        this.props.editTitle(title, id);
-    }
-
-    handleNameSubmit(name, id) {
-        this.props.editName(name, id);
-    }
+    handleSubmit(event) {
+        event.preventDefault();
+        let names = [];
+        for (let elem of event.target.elements) {  // iterate over all form elements
+            if (elem.name.startsWith('name-')){  // if it's one of our text fields...
+                names.push(elem.value);  // ... push it on the names array
+            }
+        }  
+        this.props.saveList(this.props.list.id, this.state.title, names); // call handler passed down as a props from parent
+        }
 
 
     showInput = (event) => {
         let boolean = (this.state.showInput = !this.state.showInput);
         this.setState({showInput: boolean}) 
     }
-    
+
     
     render() {
         let list = this.props.list;
         let title = this.props.list.title;
         let listJsx = (
-            this.props.list.name.map((l) => (
-                <li key={l}>
+            this.props.list.name.map((n, ix) => (
+                <li key={n}>
                     <div className={this.state.showInput ? 'dontshow' : 'show'}>
-                        {l}
+                        {n}
                     </div>
                     <div className={this.state.showInput ? 'show' : 'dontshow'}>
-                        <input
-                            placeholder={l}
-                            name="name"
-                            value={this.state.name}
-                            onChange={(e) => this.handleChange(e)}
-                        >
-                        </input>
-                        <Button onClick={(n, i) => this.handleNameSubmit(n, list.id)} variant="info" type="submit">Edit Field</Button>
+                        <form onSubmit={(e) => this.handleSubmit(e)}>
+                            <input
+                                placeholder={n}
+                                type="text"
+                                name={'name-'+ix}
+                                defaultValue={n}
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </form>
                     </div>
                 </li>
             ))
@@ -73,18 +85,18 @@ class EditList extends React.Component {
                             <h3>
                                 <input
                                     placeholder={title}
-                                    name="title"
+                                    name={title}
                                     type='text'
-                                    value={this.state.title}
-                                    onChange={(e) => this.handleChange(e)}
+                                    value={title}
+                                    onChange={(e) => this.handleTitleChange(e)}
                                 >
                                 </input>
-                                <Button onClick={(t, i) => this.handleTitleSubmit(t, list.id)} variant="info" type="submit">Edit Field</Button>
                             </h3>
                         </div>
                         <ul>
                             {listJsx}
                         </ul>
+                        <Button onClick={(e) => this.handleSubmit(e)} variant="info" type="submit">Edit Field</Button>
                        
                                            
                 </div>

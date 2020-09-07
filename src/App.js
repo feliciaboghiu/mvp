@@ -114,6 +114,10 @@ class App extends React.Component {
     
     console.log(this.state.lists);
   }
+
+  saveList(id, title, names) {
+    console.log("Hello from App")
+  }
   
 
   render() {
