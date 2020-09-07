@@ -94,7 +94,7 @@ class App extends React.Component {
   saveList(listId, newTitle, newNames) {
     let newLists = [...this.state.lists]
     let newList = newLists.find((l) => l.id === listId);
-    let nameIx = newList.name.findIndex((n) => n === newList);
+    let nameIx = newList.name.findIndex((n) => n === newNames);
     console.log(nameIx)
     newList = {id: listId, title: newTitle, name: this.state.lists.name};
     //console.log(newList)
