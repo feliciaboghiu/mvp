@@ -43,7 +43,7 @@ class ItemList extends React.Component {
                                     <li key={n}>
                                         {n}
                                         <Button variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
-                                            className={this.props.isShown ? 'display' : 'hide'}
+                                                className={this.props.isShown ? 'display' : 'hide'}
                                         >Delete Item
                                         </Button>
                                     </li>

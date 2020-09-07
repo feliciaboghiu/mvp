@@ -43,8 +43,6 @@ class NewList extends React.Component {
                         />
                     </FormLabel>
                     <Button variant="info" type="submit">Create List</Button>
-                    <br />
-                    <Button variant="info" className="white"><NavLink to={'/'} exact>Go back</NavLink></Button>
                     </FormGroup>
                 </Form>
                 

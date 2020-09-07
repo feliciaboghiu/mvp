@@ -23,7 +23,7 @@ class App extends React.Component {
       this.state = {
         lists: TEST_ITEMS, // [],
         newList: '',
-        nextListId: 3,
+        nextListId: 4,
         editedListId: null,
         list: null,
         isShown: false
@@ -94,9 +94,8 @@ class App extends React.Component {
   saveList(listId, newTitle, newNames) {
     let newLists = [...this.state.lists]
     let newList = newLists.find((l) => l.id === listId);
-    let nameIx = newList.name.findIndex((n) => n === newNames);
-    console.log(nameIx)
-    newList = {id: listId, title: newTitle, name: this.state.lists.name};
+    newList.title = newTitle;
+    newList.name = newNames;
     //console.log(newList)
     
     //let name = newList[nameIx].splice(nameIx)
@@ -108,7 +107,7 @@ class App extends React.Component {
     
     //newLists = newLists.splice(newLists[newIx], 1, newList);
     //console.log("newLists: ", newLists)
-    //this.setState({lists: newLists})
+    this.setState({lists: newLists})
     //console.log(newLists)
     this.props.history.push('/');
     

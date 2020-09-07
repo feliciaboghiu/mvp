@@ -51,9 +51,6 @@ handleSubmit(event) {
                             </FormControl>
                         </FormLabel>
                     <Button variant="info" type="submit">Add Item</Button>
-                    <br />
-                    <Button variant="info" className="white"><NavLink to={'/'} exact>Go back</NavLink></Button>
-                    
                     </FormGroup>
                 </Form>
             </div>
