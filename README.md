@@ -1,6 +1,6 @@
-# NewVentury
+# Inventarium
 
-My MVP will be called NewVentury and it's an app about Inventory Management.
+My MVP will be called Inventarium and it's an app about Inventory Management.
 
 ## Features
 

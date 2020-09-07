@@ -8,6 +8,7 @@ import { withRouter, Router } from "react-router";
 import Error404View from './Error404View';
 import EditList from './EditList';
 import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
 
 
 
@@ -96,19 +97,7 @@ class App extends React.Component {
     let newList = newLists.find((l) => l.id === listId);
     newList.title = newTitle;
     newList.name = newNames;
-    //console.log(newList)
-    
-    //let name = newList[nameIx].splice(nameIx)
-    //let newIx = newLists.findIndex((l) => l.id === listId);
-    //if(newNames) {
-    //  
-      //newList = newList.splice(newIx, 1, newNames);
-    //}
-    
-    //newLists = newLists.splice(newLists[newIx], 1, newList);
-    //console.log("newLists: ", newLists)
     this.setState({lists: newLists})
-    //console.log(newLists)
     this.props.history.push('/');
     
   }
@@ -117,21 +106,16 @@ class App extends React.Component {
     
       return (
         <div className="container">
-          <h1>NewVentory</h1>
     
           <div className="white">
-            <Button variant="info"><NavLink to='/' exact activeClassName='selected'>Item List</NavLink></Button>
-            <Button variant="info" onClick={(e)=>this.showButtons(e)}>Show Buttons</Button>
-            <Button variant="info"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></Button>
+            <Navbar bg='info' expand="lg">
+              <Navbar.Brand>Inventarium</Navbar.Brand>
+              <Button variant="info"><NavLink to='/' exact activeClassName='selected'>Item List</NavLink></Button>
+              <Button variant="info" onClick={(e)=>this.showButtons(e)}>Show Buttons</Button>
+              <Button variant="info"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></Button>
+            </Navbar>
           </div>
-              {/*{(this.state.view === itemList)
-                ? <ItemList />
-                : (this.state.view === 2)
-                  ? <InsertForm addListItem={newName => this.addListItem(newName)} />
-                  : (this.state.view === 3)
-                    ? <NewList addNewList={newList => this.addNewList(newList)} changeView={isView => this.changeView(isView)} />
-                    : ''}*/}
-
+              
             <Switch>  
 
               <Route path='/' exact>
