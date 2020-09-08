@@ -14,6 +14,7 @@ My MVP will be called Inventarium and it's an app about Inventory Management.
 ## Future Features
 
 - (Add Back-End)
+- Add light/dark mode
 - Share list (inside App and on Social Media)
 - Add collaborators
 - Group Items
