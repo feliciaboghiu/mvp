@@ -18,6 +18,14 @@ h3 {
   
 }
 
+.left li {
+  text-align: left;
+}
+
+/*.small button {
+  width: 90%;
+}*/
+
 center{
   text-align: center;
 }

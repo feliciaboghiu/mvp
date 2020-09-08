@@ -92,7 +92,7 @@ class EditList extends React.Component {
                             {listJsx}
                         </ul>
                         <div className={this.state.showInput ? 'show' : 'dontshow'}>
-                            <Button variant="info" type="submit">Save Field</Button>
+                            <Button variant="info" type="submit">Save Fields</Button>
                         </div>
                     </form>
                                            

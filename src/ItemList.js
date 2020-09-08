@@ -40,15 +40,15 @@ class ItemList extends React.Component {
                             {l.name.map((n) => (
                                 <div
                                     className={this.props.isShown ? 'underlined' : 'none'}>
-                                    <li key={n}>
-                                        {n}
-                                        <div className="centre">
-                                            <Button variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
+                                    <div className="left">
+                                        <li key={n}>
+                                            {n}
+                                                <Button className="btn-sm" variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
                                                     className={this.props.isShown ? 'display' : 'hide'}
-                                            >Delete Item
-                                            </Button>
-                                        </div>
-                                    </li>
+                                                    >Delete Item
+                                                </Button>
+                                        </li>
+                                    </div>
                                 </div>))}
                         </ul>
                         </div>

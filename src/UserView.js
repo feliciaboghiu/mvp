@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
-import ItemList from './ItemList';
-import InsertForm from './InsertForm';
+import UserView from './UserView';
 
-class App extends React.Component {
+class UserView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -18,4 +17,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default UserView;

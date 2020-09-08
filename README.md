@@ -15,7 +15,7 @@ My MVP will be called Inventarium and it's an app about Inventory Management.
 
 - (Add Back-End)
 - Share list (inside App and on Social Media)
-- Add colaborators
+- Add collaborators
 - Group Items
 - Change Items from one List to the other
 
