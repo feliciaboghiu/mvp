@@ -58,7 +58,7 @@ class ItemList extends React.Component {
         ) 
 
         return (
-            <div className="itemList">
+            <div className={this.props.showLogIn ? 'false' : 'true'}>
                 <h2>Item List</h2>
                 <Row>
                     {listJsx}

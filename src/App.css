@@ -1,21 +1,22 @@
 body {
   color: Silver;
-  background-image: url(background9.jpg);
+  background-image: url(background.jpg);
   background-repeat: repeat;
   background-size: cover;
   margin: 0 auto;
   text-align: center;
 }
 
-.container-sm input {
+.container input {
   margin-top: 15px;
 }
 
-.container-sm h2 {
+.container h2 {
   border-bottom: none;
+
 }
 
-.container-sm h1 {
+.container h1 {
   border-bottom: 1px solid silver;
 }
 
@@ -39,10 +40,6 @@ h3 {
   text-align: left;
 }
 
-/*.small button {
-  width: 90%;
-}*/
-
 center{
   text-align: center;
 }
@@ -62,6 +59,7 @@ center{
 .white a:hover {
   text-decoration: none;
 }
+
 .teal a {
   color: #17A2B8;
 }
@@ -91,4 +89,13 @@ center{
 .dontshow {
   display: none;
 }
+
+.true {
+  display: block;
+}
+
+.false {
+  display: none;
+}
+
 
