@@ -7,6 +7,23 @@ body {
   text-align: center;
 }
 
+.container-sm input {
+  margin-top: 15px;
+}
+
+.container-sm h2 {
+  border-bottom: none;
+}
+
+.container-sm h1 {
+  border-bottom: 1px solid silver;
+}
+
+.sign-up button {
+  margin-top: 10px;
+  width: 1110px;
+}
+
 h2 {
   margin-top: 10px;
   border-bottom: 1px solid #17A2B8;
