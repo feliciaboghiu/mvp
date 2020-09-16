@@ -3,16 +3,18 @@ import './App.css';
 import ItemList from './ItemList';
 import InsertForm from './InsertForm';
 import NewList from './NewList';
-import { Switch, Route, NavLink, Link} from "react-router-dom";
-import { withRouter, Router } from "react-router";
+import { Switch, Route, NavLink, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import Error404View from './Error404View';
 import EditList from './EditList';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
+import { NavbarBrand } from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const API_URL = "/api/inventarium";
+const API_URL = "/inventarium/lists";
 
 const TEST_ITEMS = [
   { id: 1, title: 'Albums', name: ["The Beatles - Sgt. Pepper' Lonely Hearts Club Band", 'The Beach Boys - Pet Sounds', "The Beatles - Revolver", 'Bob Dylan - Highway 61 Revisited', "Marvin Gaye - What's Going On", 'The Rolling Stones - Exile on Main Street']},
@@ -46,17 +48,17 @@ class App extends React.Component {
     // update state replacing lists with the specific list
     this.setState({lists: newLists})
     // change view to itemList
-    this.props.history.push('/');
+    this.props.history.push('/mylists');
   }
   
-  componentDidMount() {
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(json => {
-        // Upon success, update tasks
-        this.setState({ lists: json });
-      });
-  }
+  // componentDidMount() {
+  //   fetch(API_URL)
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       // Upon success, update tasks
+  //       this.setState({ lists: json });
+  //     });
+  // }
 
   addNewList = (newTitle) => {
     let newList = {id: this.state.nextListId, title: newTitle, name: []}
@@ -64,8 +66,8 @@ class App extends React.Component {
       lists: [...this.state.lists, newList],
       nextListId: this.state.nextListId + 1
     });
-    // Redirect to '/'
-    this.props.history.push('/');
+    // Redirect to '/mylists'
+    this.props.history.push('/mylists');
   }
 
   setEditedListId = (editedListId) =>{
@@ -97,11 +99,11 @@ class App extends React.Component {
     console.log(newList);
   }
 
-  showButtons(event) {
-    event.preventDefault();
-    let boolean= (this.state.isShown = !this.state.isShown);
-    this.setState({isShown: boolean}) 
-    }
+  // showButtons(event) {
+  //   event.preventDefault();
+  //   let boolean= (this.state.isShown = !this.state.isShown);
+  //   this.setState({isShown: boolean}) 
+  //   }
 
   saveList(listId, newTitle, newNames) {
     let newLists = [...this.state.lists]
@@ -109,7 +111,7 @@ class App extends React.Component {
     newList.title = newTitle;
     newList.name = newNames;
     this.setState({lists: newLists})
-    this.props.history.push('/');
+    this.props.history.push('/mylists');
     
   }
 
@@ -123,23 +125,24 @@ class App extends React.Component {
       return (
 
         <div className="container">
-          {/* <h1>Inventarium</h1> */}
+          <h1>Inventarium</h1>
 
-        {/* <div className={this.state.showLogIn ? 'false' : 'true'}>   */}
-          <div className="white">
+        <div className={this.state.showLogIn ? 'false' : 'true'}>  
+          {/* <div className="white"> */}
             <Navbar bg='info' expand="lg">
-              <Navbar.Brand>Inventarium</Navbar.Brand>
-              <Button variant="info"><NavLink to='/' exact activeClassName='selected'>Item List</NavLink></Button>
-              <Button variant="info" onClick={(e)=>this.showButtons(e)}>Show Buttons</Button>
+              <Button variant="info"><NavLink to='/' exact><NavbarBrand>INVENTARIUM</NavbarBrand></NavLink></Button>
+              <Button variant="info"><NavLink to='/mylists' exact activeClassName='selected'>My Lists</NavLink></Button>
               <Button variant="info"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></Button>
             </Navbar>
-            
           </div>
         {/* </div> */}
               
-            <Switch>  
-
+            <Switch> 
               <Route path='/' exact>
+                <Home />
+              </Route>
+
+              <Route path='/mylists'>
                 <ItemList  setEditedListId={this.setEditedListId} lists={this.state.lists} deleteItem={this.deleteItem} deleteList={this.deleteList} handleEditList={(i) => this.handleEditList(i)} isShown={this.state.isShown} toggleLogIn={(e)=>this.toggleLogIn(e)} showLogIn={this.state.showLogIn} />
               </Route>
 
@@ -166,12 +169,23 @@ class App extends React.Component {
               <Error404View />
 
             </Switch>
-          
-            <div>
-              <Button variant="info"><Link to="/signIn">SIGN IN</Link></Button>
-            </div>
+            
+            <br/>
         </div>
       )
+  }
+}
+
+class Home extends React.Component {
+  render() {
+    return(
+      <div className="container">
+        <h1>Welcome</h1>
+        <div>
+              <Button variant="info"><Link to="/signIn">SIGN IN</Link></Button>
+        </div>
+      </div>
+    )
   }
 }
 
@@ -195,7 +209,7 @@ class SignInSignUp extends React.Component {
         <label>Remember Me</label>
         <br />
         <div className="white">
-          <Button variant="info" onClick={(e)=>this.toggleLogIn(e)}>Submit</Button>
+          <Button variant="info" onClick={(e) => this.toggleLogIn(e)}>Submit</Button>
         </div>
       </Form>
       <br />

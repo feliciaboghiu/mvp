@@ -31,8 +31,8 @@ class ItemList extends React.Component {
                         >
                             <div className="white">
                                 <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
-                                <Button variant="info"><Link to={'/editlist/' + l.id}>Edit List</Link></Button>
-                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete List</Button>
+                                <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
+                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>❎</Button>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@ class ItemList extends React.Component {
                                             {n}
                                                 <Button className="btn-sm" variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
                                                     className={this.props.isShown ? 'display' : 'hide'}
-                                                    >Delete Item
+                                                    >❌
                                                 </Button>
                                         </li>
                                     </div>
@@ -59,7 +59,7 @@ class ItemList extends React.Component {
 
         return (
             <div className={this.props.showLogIn ? 'false' : 'true'}>
-                <h2>Item List</h2>
+                {/* <h2>Item List</h2> */}
                 <Row>
                     {listJsx}
                 </Row>

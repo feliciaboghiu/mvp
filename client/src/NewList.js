@@ -31,18 +31,19 @@ class NewList extends React.Component {
     render() {
         return (
             <div>
-                <h2>Insert List Title</h2>
+                <h2>Add New List</h2>
                 <Form onSubmit={(e) => this.handleSubmit2(e)}>
                     <FormGroup>
-                    <FormLabel>Insert New List
+                    <FormLabel>
                         <input
                             name="newList"
                             type='text'
+                            placeholder="list title"
                             value={this.state.newList}
                             onChange={e => this.handleChange2(e)}
                         />
                     </FormLabel>
-                    <Button variant="info" type="submit">Create List</Button>
+                    <Button variant="info" type="submit">✅</Button>
                     </FormGroup>
                 </Form>
                 

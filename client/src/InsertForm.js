@@ -30,6 +30,8 @@ handleSubmit(event) {
         //console.log(this.props.match.path);
       
         this.props.addNewItem(this.state.newName, this.props.editedListId);
+        // redirect to My lists page
+        this.props.history.push('/mylists');
     }
 
     
@@ -37,7 +39,7 @@ handleSubmit(event) {
             
         return (
             <div>
-                <h2>Add more</h2>
+                <h2>Add items</h2>
                 <Form onSubmit={(e) => this.handleSubmit(e)}>
                     <FormGroup>
                         <FormLabel>
@@ -45,32 +47,15 @@ handleSubmit(event) {
                                 <input
                                 name="newName"
                                 type='text'
-                                placeholder="item"
                                 value={this.state.newName}
                                 onChange={(e) => this.handleChange(e)}
                             />
                             <br/>
-
-                                <input
-                                name="newName"
-                                type='text'
-                                placeholder="item"
-                                value={this.state.newName}
-                                onChange={(e) => this.handleChange(e)}
-                            />
-                            <br/>
-
-                                <input
-                                name="newName"
-                                type='text'
-                                placeholder="item"
-                                value={this.state.newName}
-                                onChange={(e) => this.handleChange(e)}
-                                />
                             </FormControl>
                         </FormLabel>
                         <br/>
                     <Button variant="info" type="submit">Add</Button>
+                    {/* <button onClick={(e) => this.props.history.push('/mylists')} type="button">Cancel</button> */}
                     </FormGroup>
                 </Form>
             </div>

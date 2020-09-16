@@ -6,7 +6,9 @@ body {
   margin: 0 auto;
   text-align: center;
 }
-
+* {
+  color: silver;
+}
 .container input {
   margin-top: 30px;
 }
@@ -22,7 +24,7 @@ body {
 
 .sign-up button {
   margin-top: 10px;
-  width: 1110px;
+  width: 100px;
 }
 
 h2 {
@@ -40,9 +42,9 @@ h3 {
   text-align: left;
 }
 
-center {
+/* center {
   text-align: center;
-}
+} */
 
 .white a {
   color: white;
@@ -68,13 +70,12 @@ center {
   color: teal;
 }
 
-
 .teal a:hover {
   text-decoration: none;
   color: white;
 }
 
-.hide {
+/* .hide {
   display: none;
 }
 
@@ -96,6 +97,9 @@ center {
 
 .false {
   display: none;
+} */
+
+
+li {
+  list-style: square;
 }
-
-
