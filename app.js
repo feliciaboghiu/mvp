@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -17,12 +17,12 @@ app.use(cookieParser());
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get("/", function(req, res, next) {
-  res.send("Access the ??? at path /???");
-});
+// app.get("/", function(req, res, next) {
+//   res.send("Access the ??? at path /???");
+// });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
