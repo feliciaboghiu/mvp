@@ -5,57 +5,50 @@ import Button from 'react-bootstrap/Button';
 
 class ItemList extends React.Component {
     
-    setEditedListId=(id)=>{
+    setEditedListId(id) {
         this.props.setEditedListId(id)
-        console.log("My new ID: ",id)
+        // console.log("My new ID: ",id)
     }
 
-    handleSubmit(id, name) {
-        this.props.deleteItem(id, name);
+    handleSubmit(list_id, text) {
+        this.props.deleteItem(list_id, text);
     }
 
-    handleListDelete(id) {
-        this.props.deleteList(id)
+    handleListDelete(list_id) {
+        this.props.deleteList(list_id)
     }
 
      render() {
-        
         let listJsx = (
             this.props.lists.map((l) => (
-                
                 <Col sm='4' key={l.title}>
                     <div className="background">
                         <h3>{l.title}</h3>
-                        <div
-                            className={this.props.isShown ? 'display' : 'hide'}
-                        >
+
                             <div className="white">
                                 <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
                                 <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
-                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>❎</Button>
+                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete</Button>
                             </div>
                         </div>
 
                         <ul>
-                            {l.name.map((n) => (
-                                <div
-                                    className={this.props.isShown ? 'underlined' : 'none'}>
-                                    <div className="left">
-                                        <li key={n}>
-                                            {n}
-                                                <Button className="btn-sm" variant="outline-info" onClick={(e) => this.props.deleteItem(l.id, n)}
-                                                    className={this.props.isShown ? 'display' : 'hide'}
-                                                    >❌
-                                                </Button>
-                                        </li>
-                                    </div>
-                                </div>))}
+                            {this.props.lists.ItemList.map((i) => (
+                                <div className="left">
+                                    <li key={i}>
+                                        {i}
+                                        <Button className="btn-sm"
+                                        variant="outline-info"
+                                        onClick={(e) => this.props.deleteItem(l.id, i)}>
+                                        Delete
+                                        </Button>
+                                    </li>
+                                </div>
+                            ))}
                         </ul>
-                        </div>
-                    </Col>
-                    ))
-                    
-        ) 
+                </Col>
+                ))
+            ) 
 
         return (
             <div className={this.props.showLogIn ? 'false' : 'true'}>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Switch, Route, Link, NavLink} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
 class EditList extends React.Component {
@@ -8,53 +7,52 @@ class EditList extends React.Component {
         this.state = {
             showInput: false,
             title: props.list.title
-
         };
     }
 
-    handleTitleChange = (event) => {
+    handleTitleChange (event) {
         this.setState({
             title: event.target.value
         });
     }
 
-    handleChange = (event) => {
+    handleChange(event) {
         let { name, value } = event.target;
         this.setState({ [name]: value });   
     };
 
     handleSubmit(event) {
         event.preventDefault();
-        let names = [];
+        let items = [];
         for (let elem of event.target.elements) {  // iterate over all form elements
-            if (elem.name.startsWith('name-')){  // if it's one of our text fields...
-                names.push(elem.value);  // ... push it on the names array
+            if (elem.item.startsWith('item-')){  // if it's one of our text fields...
+                items.push(elem.value);  // ... push it on the names array
             }
         }  
-        this.props.saveList(this.props.list.id, this.state.title, names); // call handler passed down as a props from parent
+        this.props.saveList(this.props.list.id, this.state.title, items); // call handler passed down as a props from parent
         }
 
 
-    showInput = (event) => {
-        let boolean = (this.state.showInput = !this.state.showInput);
-        this.setState({showInput: boolean}) 
-    }
+    // showInput = (event) => {
+    //     let boolean = (this.state.showInput = !this.state.showInput);
+    //     this.setState({showInput: boolean}) 
+    // }
 
     
     render() {
         let list = this.props.list;
         let title = this.props.list.title;
         let listJsx = (
-            this.props.list.name.map((n, ix) => (
-                <li key={n}>
+            this.props.list.items.map((i, ix) => (
+                <li key={i}>
                     <div className={this.state.showInput ? 'dontshow' : 'show'}>
-                        {n}
+                        {i}
                     </div>
-                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                    <div>
                         <input
                             type="text"
-                            name={'name-'+ix}
-                            defaultValue={n}
+                            name={'item-'+ix}
+                            defaultValue={i}
                             onChange={(e) => this.handleChange(e)}
                         />
                     </div>

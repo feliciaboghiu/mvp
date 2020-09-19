@@ -2,9 +2,9 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
-import FormControl from 'react-bootstrap/FormLabel';
+// import FormControl from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
-import NavLink from 'react-bootstrap/NavLink';
+// import NavLink from 'react-bootstrap/NavLink';
 
 
 class NewList extends React.Component {
@@ -43,10 +43,9 @@ class NewList extends React.Component {
                             onChange={e => this.handleChange2(e)}
                         />
                     </FormLabel>
-                    <Button variant="info" type="submit">✅</Button>
+                    <Button variant="info" type="submit">Add</Button>
                     </FormGroup>
                 </Form>
-                
             </div>
         )
     }

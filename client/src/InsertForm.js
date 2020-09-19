@@ -5,20 +5,20 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import FormControl from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
-import NavLink from 'react-bootstrap/NavLink';
+// import NavLink from 'react-bootstrap/NavLink';
 
 
 class InsertForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newName: ''
+            newItem: ''
         };
     }
 
     handleChange = (event) => {
         this.setState({
-            newName: event.target.value
+            newItem: event.target.value
         });
     };
 
@@ -29,7 +29,7 @@ handleSubmit(event) {
         
         //console.log(this.props.match.path);
       
-        this.props.addNewItem(this.state.newName, this.props.editedListId);
+        this.props.addNewItem(this.state.newItem, this.props.editedListId);
         // redirect to My lists page
         this.props.history.push('/mylists');
     }
@@ -45,9 +45,9 @@ handleSubmit(event) {
                         <FormLabel>
                             <FormControl>
                                 <input
-                                name="newName"
+                                name="newItem"
                                 type='text'
-                                value={this.state.newName}
+                                value={this.state.newItem}
                                 onChange={(e) => this.handleChange(e)}
                             />
                             <br/>
