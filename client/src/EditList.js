@@ -33,10 +33,10 @@ class EditList extends React.Component {
         }
 
 
-    // showInput = (event) => {
-    //     let boolean = (this.state.showInput = !this.state.showInput);
-    //     this.setState({showInput: boolean}) 
-    // }
+    showInput = (event) => {
+        let boolean = (this.state.showInput = !this.state.showInput);
+        this.setState({showInput: boolean}) 
+    }
 
     
     render() {
