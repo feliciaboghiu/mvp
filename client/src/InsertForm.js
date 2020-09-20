@@ -16,7 +16,7 @@ class InsertForm extends React.Component {
         };
     }
 
-    handleChange = (event) => {
+    handleChange(event) {
         this.setState({
             newItem: event.target.value
         });

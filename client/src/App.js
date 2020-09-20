@@ -12,8 +12,9 @@ import Navbar from 'react-bootstrap/Navbar';
 // import Form from 'react-bootstrap/Form';
 import { NavbarBrand } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from "./components/login.js";
+// import Login from "./components/login.js";
 import SignUp from "./components/signUp.js";
+import ValidatedLoginForm from "./components/validatedLoginForm.js";
 
 
 const API_URL = "/inventarium/lists";
@@ -32,9 +33,9 @@ class App extends React.Component {
         newList: '',
         nextListId: 4,
         editedListId: null,
-        list: null
-        // isShown: false,
-        // showLogIn: true
+        list: null,
+        isShown: false,
+        showLogIn: true
       };
     }
 
@@ -47,6 +48,7 @@ class App extends React.Component {
       })
       .catch(error => {
         // upon failure, show error message
+        console.log("Error")
       });
   }
 
@@ -83,11 +85,11 @@ class App extends React.Component {
 
   addNewItem = (newItem, list_id) => {
     // copy lists
-    let newLists = [...this.state.lists]
-    // find the index of the list using listId
+    let newLists = [...this.state.lists];
+    // find the index of the list using list_id
     let newIx = newLists.findIndex((l) => l.id === list_id);
     // get that specific list using the index
-    let newList = newLists[newIx]
+    let newList = newLists[newIx];
     // add newItem to that list  
     newList.item.push(newItem)
     // update state replacing lists with the specific list
@@ -136,16 +138,16 @@ class App extends React.Component {
     this.setState({ editedListId: editedListId });
   }
 
-  deleteItem = (list_id, text) => {
-    //console.log(listId, item)
+  deleteItem(list_id, item_id) {
+    // console.log(list_id, item_id);
     let newLists = [...this.state.lists]
     let newList = newLists.find((l) => l.id === list_id);
-    newList.item = newList.item.filter((i) => i !== text);
+    newList.item = newList.item.filter((i) => i !== item_id);
     this.setState({lists: newLists})
   }
 
-  deleteList = (list_id) => {  
-    let newLists = [...this.state.lists];
+  deleteList(list_id) {  
+    let newLists = [...this.state.lists]
     let newIx = newLists.findIndex((l) => l.id === list_id);
     newLists.splice(newIx, 1)
     this.setState({lists: newLists})
@@ -155,38 +157,38 @@ class App extends React.Component {
   handleEditList(list_id) {
     let newLists = [...this.state.lists]
     let newIx = newLists.findIndex((l) => l.id === list_id);
-    let newList = newLists[newIx]
+    let newList = newLists[newIx];
     this.setState({list: newList})
     console.log(newList);
   }
 
   // showButtons(event) {
   //   event.preventDefault();
-  //   let boolean= (this.state.isShown = !this.state.isShown);
+  //   // let boolean= (this.state.isShown = !this.state.isShown);
   //   this.setState({isShown: boolean}) 
   //   }
 
   saveList(list_id, newTitle, newItems) {
-    let newLists = [...this.state.lists]
+    let newLists = [...this.state.lists];
     let newList = newLists.find((l) => l.id === list_id);
     newList.title = newTitle;
     newList.item = newItems;
     this.setState({lists: newLists})
     this.props.history.push('/mylists');
-    
   }
 
   // toggleLogIn(event) {
+  //   event.preventDefault();
   //   let boolean = (this.state.showLogIn = !this.state.showLogIn);
   //     this.setState({showLogIn: boolean}) 
   // }
 
   render() {
-    
     return (
       <Router>
         <div className="container">
-        <div className="text-center">  
+        <div className={this.state.showLogIn ? 'false' : 'true'}>
+
             <Navbar bg='info' expand="lg">
               <Button variant="info"><NavLink to='/' exact><NavbarBrand>INVENTARIUM</NavbarBrand></NavLink></Button>
               <Button variant="info"><NavLink to='/mylists' exact activeClassName='selected'>My Lists</NavLink></Button>
@@ -209,7 +211,10 @@ class App extends React.Component {
               </Route>
 
               <Route path='/additem'> 
-                <InsertForm editedListId={this.state.editedListId} newItem={this.state.newItem} addNewItem={this.addNewItem} id={this.state.lists.id}/>
+                <InsertForm editedListId={this.state.editedListId}
+                newItem={this.state.newItem}
+                addNewItem={this.addNewItem}
+                id={this.state.lists.id}/>
               </Route>
 
               <Route path='/addlist'>
@@ -228,7 +233,7 @@ class App extends React.Component {
               <div>
                 <div>
                   <Route path='/login'>
-                    <Login />
+                    <ValidatedLoginForm />
                   </Route>
                   <Route path='/sign-up'>
                     <SignUp />

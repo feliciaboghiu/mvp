@@ -2,47 +2,55 @@ import React from 'react';
 
 class Login extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = ({
             email: '',
             password: ''
         });
 
-        this.updateInput = this.updateInput.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    updateInput(event) {
-        let { name, value } = event.target;
-        this.setState({ [name]: value });
-    }
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.history.push('./mylists');
-        }
+        console.log("Submitting");
+        console.log(this.state);
+        // this.props.history.push('./mylists');
+    }
 
     render() {
+        const { email, password } = this.state;
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <h3>SIGN IN</h3>
                     <div className="form-group">
-                        <label>Email</label>
-                        <input type="email"
-                        value={this.state.email}
+                        <label htmlFor="email">Email</label>
+                        <input 
+                        name="email"
+                        type="text"
+                        value={email}
                         className="form-control"
-                        placeholder="Enter email"
-                        onChange={this.updateInput} />
+                        placeholder="Enter your email"
+                        onChange={this.handleChange} />
                     </div>
 
                     <div className="form-group">
-                        <label>Password</label>
-                        <input type="password"
+                        <label htmlFor="email">Password</label>
+                        <input
+                        name="password"
+                        type="password"
                         value={this.state.password}
                         className="form-control"
-                        placeholder="Enter password"
-                        onChange={this.updateInput} />
+                        placeholder="Enter your password"
+                        onChange={this.handleChange} />
                     </div>
 
                     <div className="form-group">
@@ -52,7 +60,7 @@ class Login extends React.Component {
                         </div>
                     </div>
 
-                    <button onClick={this.handleSubmit} type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <button type="button" className="btn btn-primary btn-block">Login</button>
                     <p className="forgot-password text-right">
                         Forgot <a href="https://reactjs.org/">password?</a>
                     </p>

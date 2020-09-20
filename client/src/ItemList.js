@@ -10,8 +10,8 @@ class ItemList extends React.Component {
         // console.log("My new ID: ",id)
     }
 
-    handleSubmit(list_id, text) {
-        this.props.deleteItem(list_id, text);
+    handleSubmit(list_id, item_id) {
+        this.props.deleteItem(list_id, item_id);
     }
 
     handleListDelete(list_id) {
@@ -21,30 +21,34 @@ class ItemList extends React.Component {
      render() {
         let listJsx = (
             this.props.lists.map((l) => (
+
                 <Col sm='4' key={l.title}>
                     <div className="background">
                         <h3>{l.title}</h3>
 
+                            <div className={this.props.isShown ? 'display' : 'hide'}>
                             <div className="white">
                                 <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
                                 <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
                                 <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete</Button>
                             </div>
-                        </div>
+                            </div>
+                    </div>
 
                         <ul>
-                            {this.props.lists.ItemList.map((i) => (
+                            {l.items.map((i) => (
+                                <div className={this.props.isShown ? 'underlined' : 'none'}>
                                 <div className="left">
-                                    <li key={i}>
-                                        {i}
+                                    <li key={i.id}>
+                                        {i.text}
                                         <Button className="btn-sm"
                                         variant="outline-info"
-                                        onClick={(e) => this.props.deleteItem(l.id, i)}>
+                                        onClick={() => this.props.deleteItem(l.id, i.id)}>
                                         Delete
                                         </Button>
                                     </li>
-                                </div>
-                            ))}
+                                    </div>
+                                </div>))}
                         </ul>
                 </Col>
                 ))
@@ -52,7 +56,7 @@ class ItemList extends React.Component {
 
         return (
             <div className={this.props.showLogIn ? 'false' : 'true'}>
-                {/* <h2>Item List</h2> */}
+                <h2>Item List</h2>
                 <Row>
                     {listJsx}
                 </Row>

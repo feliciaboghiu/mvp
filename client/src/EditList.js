@@ -10,7 +10,7 @@ class EditList extends React.Component {
         };
     }
 
-    handleTitleChange (event) {
+    handleTitleChange(event) {
         this.setState({
             title: event.target.value
         });
@@ -25,7 +25,7 @@ class EditList extends React.Component {
         event.preventDefault();
         let items = [];
         for (let elem of event.target.elements) {  // iterate over all form elements
-            if (elem.item.startsWith('item-')){  // if it's one of our text fields...
+            if (elem.item.startsWith('item-')) {  // if it's one of our text fields...
                 items.push(elem.value);  // ... push it on the names array
             }
         }  
@@ -33,22 +33,23 @@ class EditList extends React.Component {
         }
 
 
-    showInput = (event) => {
-        let boolean = (this.state.showInput = !this.state.showInput);
-        this.setState({showInput: boolean}) 
-    }
+    // showInput = (event) => {
+    //     let boolean = (this.state.showInput = !this.state.showInput);
+    //     this.setState({ showInput: boolean }) 
+    // }
 
     
     render() {
-        let list = this.props.list;
+        // let list = this.props.list;
         let title = this.props.list.title;
         let listJsx = (
-            this.props.list.items.map((i, ix) => (
+            this.props.list.item.map((i, ix) => (
                 <li key={i}>
                     <div className={this.state.showInput ? 'dontshow' : 'show'}>
                         {i}
                     </div>
-                    <div>
+
+                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
                         <input
                             type="text"
                             name={'item-'+ix}
@@ -56,6 +57,7 @@ class EditList extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                         />
                     </div>
+
                 </li>
             ))
         );
@@ -66,9 +68,11 @@ class EditList extends React.Component {
                     <h2>Edit List</h2> 
                     <Button variant="info" onClick={(e)=>this.showInput(e)}>Show Input Fields</Button>
                     <br />
+                    
                     <div className={this.state.showInput ? 'show' : 'dontshow'}>
                         <label>Choose one item to edit: </label> 
                     </div>
+
                     <div className={this.state.showInput ? 'dontshow' : 'show'}>
                         <h3>
                             {title}

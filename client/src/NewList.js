@@ -15,14 +15,14 @@ class NewList extends React.Component {
         };
     }
 
-    handleChange2 = (event) => {
+    handleChange2(event) {
         this.setState({
             newList: event.target.value
         });
     };
 
 
-    handleSubmit2 = (event) => {
+    handleSubmit2(event) {
         event.preventDefault();
         // Pass the state
         this.props.addNewList(this.state.newList);
@@ -43,6 +43,7 @@ class NewList extends React.Component {
                             onChange={e => this.handleChange2(e)}
                         />
                     </FormLabel>
+                    <br/>
                     <Button variant="info" type="submit">Add</Button>
                     </FormGroup>
                 </Form>
