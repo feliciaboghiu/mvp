@@ -60,7 +60,9 @@ function reduceLists(rows) {
       list = { id: row.l_id, title: row.title };
       items = [];
     }
-    items.push({ id: row.i_id, text: row.text, list_id: row.list_id });
+    if (row.i_id) {
+      items.push({ id: row.i_id, text: row.text, list_id: row.list_id });
+    }
   }
 
   list.items = items;
@@ -77,9 +79,9 @@ router.get('/inventarium', function(req, res, next) {
 });
 
 // get all lists and items
-router.get('/inventarium/lists', (req, res) => {
+router.get('/inventarium/lists/', (req, res) => {
 
-  db("SELECT lists.id AS l_id, lists.title, items.id AS i_id, items.text, items.list_id FROM lists INNER JOIN items on lists.id = items.list_id")
+  db("SELECT lists.id AS l_id, lists.title, items.id AS i_id, items.text, items.list_id FROM lists LEFT JOIN items on lists.id = items.list_id;")
   .then(results => {
     res.send(reduceLists(results.data));
   })

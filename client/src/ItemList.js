@@ -28,9 +28,9 @@ class ItemList extends React.Component {
 
                             <div>
                             <div className="white">
-                                <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
+                                <Button variant="info" onClick={(list_id) => this.setEditedListId(list_id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
                                 <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
-                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete</Button>
+                                <Button variant="info" onClick={(list_id) => this.handleListDelete(list_id)}>Delete</Button>
                             </div>
                             </div>
                     </div>

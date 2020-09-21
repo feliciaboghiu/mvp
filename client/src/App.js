@@ -46,21 +46,12 @@ class App extends React.Component {
   }
 
   async addNewItem(newItem, list_id) {
-    // copy lists
-    let newItems = [...this.state.lists.items];
-    // find the index of the list using listId
-    let newIx = newItem.findIndex((l) => l.id === list_id);
-    // get that specific list using the index
-    let newList = newItems[newIx]
-    // add newItem to that list  
-    newList.items.push(newItem)
-    console.log(this.state.lists.items.text);
-
+    let item = { text: newItem, list_id: list_id};
     // POST
     let options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newItems)
+      body: JSON.stringify(item)
     };
 
   try {
@@ -78,7 +69,7 @@ class App extends React.Component {
 }
 
   async addNewList(newTitle) {
-    let newList = { id: this.state.nextListId, title: newTitle, item: [] };
+    let newList = { id: this.state.nextListId, title: newTitle, items: [] };
 
     let options = {
       method: "POST",
@@ -99,8 +90,6 @@ class App extends React.Component {
     } catch (err) {
       console.log("EXCEPTION:", err.message);
     }
-    // Redirect to '/mylists'
-    this.props.history.push('/mylists');
   }
 
   setEditedListId(editedListId) {
@@ -115,7 +104,7 @@ class App extends React.Component {
     try {
       let response = await fetch(`${API_URL2}/${item_id}`, options);
       if (response.ok) {
-        let newLists = [...this.state.lists]
+        let newLists = await response.json();
         let newList = newLists.find((l) => l.id === list_id);
         newList.item = newList.item.filter((i) => i !== item_id);
         // upon success, update the list of items
@@ -139,9 +128,6 @@ class App extends React.Component {
       let response = await fetch(`${API_URL}/${list_id}`, options);
       if (response.ok) {
         let newLists = await response.json();
-        let newIx = newLists.findIndex((l) => l.id === list_id);
-        newLists.splice(newIx, 1)
-        // upon success, update tasks
         this.setState({ lists: newLists });
       } else {
         console.log("ERROR:", response.status, response.statusText);
@@ -153,22 +139,20 @@ class App extends React.Component {
   }
 
   async handleEditList(list_id) {
-    let newLists = [...this.state.lists];
-    let newIx = newLists.findIndex((l) => l.id === list_id);
-    
+    let list = this.state.lists.find(l => l.id === list_id);
     // PUT
     let options = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newLists)
+      body: JSON.stringify(list)
     };
 
     try {
       let response = await fetch(`${API_URL}/${list_id}`, options);
       if (response.ok) {
-        let newList = newLists[newIx];
+        let newList = await response.json();
+        // upon success, update tasks
         this.setState({ list: newList });
-        console.log(newList);
       } else {
         console.log("ERROR:", response.status, response.statusText);
       }
