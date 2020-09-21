@@ -22,8 +22,7 @@ class InsertForm extends React.Component {
         });
     };
 
-
-handleSubmit(event) {
+    handleSubmit(event) {
         // Pass the state
         event.preventDefault();
         
@@ -55,7 +54,7 @@ handleSubmit(event) {
                         </FormLabel>
                         <br/>
                     <Button variant="info" type="submit">Add</Button>
-                    {/* <button onClick={(e) => this.props.history.push('/mylists')} type="button">Cancel</button> */}
+                    <Button onClick={(e) => this.props.history.push('/mylists')} type="button">Cancel</Button>
                     </FormGroup>
                 </Form>
             </div>

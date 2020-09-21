@@ -26,7 +26,7 @@ class ItemList extends React.Component {
                     <div className="background">
                         <h3>{l.title}</h3>
 
-                            <div className={this.props.isShown ? 'display' : 'hide'}>
+                            <div>
                             <div className="white">
                                 <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
                                 <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
@@ -37,7 +37,7 @@ class ItemList extends React.Component {
 
                         <ul>
                             {l.items.map((i) => (
-                                <div className={this.props.isShown ? 'underlined' : 'none'}>
+
                                 <div className="left">
                                     <li key={i.id}>
                                         {i.text}
@@ -47,7 +47,6 @@ class ItemList extends React.Component {
                                         Delete
                                         </Button>
                                     </li>
-                                    </div>
                                 </div>))}
                         </ul>
                 </Col>
@@ -55,7 +54,7 @@ class ItemList extends React.Component {
             ) 
 
         return (
-            <div className={this.props.showLogIn ? 'false' : 'true'}>
+            <div>
                 <h2>Item List</h2>
                 <Row>
                     {listJsx}

@@ -33,10 +33,10 @@ class EditList extends React.Component {
         }
 
 
-    // showInput = (event) => {
-    //     let boolean = (this.state.showInput = !this.state.showInput);
-    //     this.setState({ showInput: boolean }) 
-    // }
+    showInput = (event) => {
+        let boolean = (this.state.showInput = !this.state.showInput);
+        this.setState({ showInput: boolean }) 
+    }
 
     
     render() {
@@ -45,11 +45,11 @@ class EditList extends React.Component {
         let listJsx = (
             this.props.list.item.map((i, ix) => (
                 <li key={i}>
-                    <div className={this.state.showInput ? 'dontshow' : 'show'}>
+                    <div>
                         {i}
                     </div>
 
-                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                    <div>
                         <input
                             type="text"
                             name={'item-'+ix}
@@ -66,9 +66,7 @@ class EditList extends React.Component {
 
                 <div className="itemList">
                     <h2>Edit List</h2> 
-                    <Button variant="info" onClick={(e)=>this.showInput(e)}>Show Input Fields</Button>
-                    <br />
-                    
+
                     <div className={this.state.showInput ? 'show' : 'dontshow'}>
                         <label>Choose one item to edit: </label> 
                     </div>
@@ -78,6 +76,7 @@ class EditList extends React.Component {
                             {title}
                         </h3>
                     </div>
+
                     <form onSubmit={(e) => this.handleSubmit(e)}>    
                         <div className={this.state.showInput ? 'show' : 'dontshow'}>
                             <h3>
@@ -90,9 +89,11 @@ class EditList extends React.Component {
                                 </input>
                             </h3>
                         </div>
+                        
                         <ul>
                             {listJsx}
                         </ul>
+
                         <div className={this.state.showInput ? 'show' : 'dontshow'}>
                             <Button variant="info" type="submit">Save Fields</Button>
                         </div>

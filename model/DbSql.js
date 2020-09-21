@@ -2,7 +2,7 @@ module.exports = `
 
     DROP TABLE IF EXISTS lists; CREATE TABLE lists(id INT NOT NULL AUTO_INCREMENT, title VARCHAR(40) NOT NULL, PRIMARY KEY (id));
 
-    DROP TABLE IF EXISTS items; CREATE TABLE items(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, text VARCHAR(100) NOT NULL, list_id INT, FOREIGN KEY (list_id) REFERENCES lists(id));
+    DROP TABLE IF EXISTS items; CREATE TABLE items(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, text VARCHAR(100) NOT NULL, list_id INT, FOREIGN KEY (list_id) REFERENCES lists(id) ON DELETE CASCADE);
 
     INSERT INTO lists (title) VALUES ('Albums'), ('Films'), ('Pantry'), ('Fridge'), ('Books');  
 

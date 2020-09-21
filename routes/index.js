@@ -73,13 +73,12 @@ function reduceLists(rows) {
 
 /* GET home page. */
 router.get('/inventarium', function(req, res, next) {
-  res.send({ title: 'Welcome to the Inventorium' });
+  res.send({ title: 'Welcome to the Inventarium' });
 });
 
 // get all lists and items
 router.get('/inventarium/lists', (req, res) => {
 
-  // db("SELECT * FROM lists;")
   db("SELECT lists.id AS l_id, lists.title, items.id AS i_id, items.text, items.list_id FROM lists INNER JOIN items on lists.id = items.list_id")
   .then(results => {
     res.send(reduceLists(results.data));
@@ -127,10 +126,11 @@ router.put('/inventarium/lists/:list_id', async (req, res) => {
 router.delete('/inventarium/lists/:list_id', async (req, res) => {
   let id = req.params.list_id;
   // 404 Check
-  if ((await recordExists(id)) === false) {
+  if ((await listExists(id)) === false) {
     res.status(404).send({ error: "Not Found" });
     return;
   }
+
   let sql = `DELETE FROM lists WHERE id = ${id}`;
 
   try {
@@ -145,7 +145,7 @@ router.delete('/inventarium/lists/:list_id', async (req, res) => {
 
 
 // get all items
-router.get('/inventarium/items', (req, res) => {
+router.get('/inventarium/lists/items', (req, res) => {
   db("SELECT * FROM items;")
   .then(results => {
     res.send(results.data);
@@ -154,7 +154,7 @@ router.get('/inventarium/items', (req, res) => {
 });
 
 // add items
-router.post('/inventarium/items', async (req, res) => {
+router.post('/inventarium/lists/items', async (req, res) => {
   let { text, list_id } = req.body;
   let sql = `INSERT INTO items (text, list_id) VALUES ('${text}', ${list_id})`;
   try {
@@ -168,7 +168,7 @@ router.post('/inventarium/items', async (req, res) => {
 });
 
 // edit items
-router.put('/inventarium/items/:item_id', async (req, res) => {
+router.put('/inventarium/lists/items/:item_id', async (req, res) => {
   let id = req.params.item_id;
 
   // 404 Check
@@ -190,7 +190,7 @@ router.put('/inventarium/items/:item_id', async (req, res) => {
 });
 
 // delete item
-router.delete('/inventarium/items/:item_id', async (req, res) => {
+router.delete('/inventarium/lists/items/:item_id', async (req, res) => {
   let id = req.params.item_id;
   // 404 Check
   if ((await itemExists(id)) === false) {

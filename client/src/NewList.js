@@ -11,28 +11,27 @@ class NewList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newList: ''
+            newTitle: ""
         };
     }
 
     handleChange2(event) {
         this.setState({
-            newList: event.target.value
+            newTitle: event.target.value
         });
     };
-
 
     handleSubmit2(event) {
         event.preventDefault();
         // Pass the state
-        this.props.addNewList(this.state.newList);
+        this.props.addNewList(this.state.newTitle);
     }
 
     render() {
         return (
             <div>
                 <h2>Add New List</h2>
-                <Form onSubmit={(e) => this.handleSubmit2(e)}>
+                <Form>
                     <FormGroup>
                     <FormLabel>
                         <input
@@ -44,7 +43,7 @@ class NewList extends React.Component {
                         />
                     </FormLabel>
                     <br/>
-                    <Button variant="info" type="submit">Add</Button>
+                    <Button variant="info" type="submit" onSubmit={(e) => this.handleSubmit2(e)}>Submit</Button>
                     </FormGroup>
                 </Form>
             </div>
