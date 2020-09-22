@@ -15,7 +15,7 @@ class ItemList extends React.Component {
     }
 
     handleListDelete(list_id) {
-        this.props.deleteList(list_id)
+        this.props.deleteList(list_id);
     }
 
      render() {
@@ -28,27 +28,31 @@ class ItemList extends React.Component {
 
                             <div>
                             <div className="white">
-                                <Button variant="info" onClick={(list_id) => this.setEditedListId(list_id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
+                                <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
                                 <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
-                                <Button variant="info" onClick={(list_id) => this.handleListDelete(list_id)}>Delete</Button>
+                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete</Button>
                             </div>
                             </div>
                     </div>
+                        { 
+                            l.items && (
 
-                        <ul>
-                            {l.items.map((i) => (
+                            <ul>
+                                {l.items.map((i) => (
 
                                 <div className="left">
                                     <li key={i.id}>
                                         {i.text}
                                         <Button className="btn-sm"
                                         variant="outline-info"
-                                        onClick={() => this.props.deleteItem(l.id, i.id)}>
+                                        onClick={ () => this.props.deleteItem(l.id, i.id) }>
                                         Delete
                                         </Button>
                                     </li>
                                 </div>))}
-                        </ul>
+                            </ul>
+                            )
+                        }
                 </Col>
                 ))
             ) 

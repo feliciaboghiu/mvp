@@ -109,6 +109,27 @@ li {
 * {
   box-sizing: border-box;
 }
+
+/* SOCIAL MEDIA ICONS */
+.social-container {
+  padding: 25px 50px;
+}
+
+a.social {
+  margin: 0 1rem;
+  transition: transform 250ms;
+  display: inline-block;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
 /* body {
   background: #1C8EF9 !important;
   min-height: 100vh;

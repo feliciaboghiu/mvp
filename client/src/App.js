@@ -3,7 +3,7 @@ import './App.css';
 import ItemList from './ItemList';
 import InsertForm from './InsertForm';
 import NewList from './NewList';
-import { BrowserRouter as Router, Switch, Route, NavLink, Link } from "react-router-dom";
+import { Switch, Route, NavLink, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Error404View from './Error404View';
 import EditList from './EditList';
@@ -12,8 +12,8 @@ import Navbar from 'react-bootstrap/Navbar';
 // import Form from 'react-bootstrap/Form';
 import { NavbarBrand } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Login from "./components/login.js";
-import SignUp from "./components/signUp.js";
+import SocialFollow from './components/socialFollow.js';
+import SignupForm from "./components/signUp.js";
 import ValidatedLoginForm from "./components/validatedLoginForm.js";
 
 
@@ -26,9 +26,8 @@ class App extends React.Component {
       this.state = {
         lists: [],
         newList: "",
-        nextListId: 6,
         editedListId: null,
-        list: null,
+        list: null
       };
     }
 
@@ -57,19 +56,20 @@ class App extends React.Component {
   try {
     let response = await fetch(API_URL2, options);
     if (response.ok) {
-    let newLists = await response.json();
-    this.setState({ lists: newLists });
+    let newItem = await response.json();
+    this.setState({ text: newItem });
     } else {
       console.log("ERROR:", response.status, response.statusText);
       }
     } catch (err) {
       console.log("EXCEPTION:", err.message);
   }
-    this.props.history.push('/mylists');
+  this.setState({ lists: this.state.lists })
 }
 
   async addNewList(newTitle) {
-    let newList = { id: this.state.nextListId, title: newTitle, items: [] };
+
+    let newList = { title: newTitle };
 
     let options = {
       method: "POST",
@@ -81,9 +81,7 @@ class App extends React.Component {
       let response = await fetch(API_URL, options);
       if (response.ok) {
         let newLists = await response.json();
-        this.setState({
-          lists: [...this.state.lists, newLists],
-          nextListId: this.state.newListId +1 });
+        this.setState({ lists: newLists });
       } else {
         console.log("ERROR:", response.status, response.statusText);
       }
@@ -105,8 +103,8 @@ class App extends React.Component {
       let response = await fetch(`${API_URL2}/${item_id}`, options);
       if (response.ok) {
         let newLists = await response.json();
-        let newList = newLists.find((l) => l.id === list_id);
-        newList.item = newList.item.filter((i) => i !== item_id);
+        // let newList = newLists.find((l) => l.id === list_id);
+        // newList.item = newList.item.filter((i) => i !== item_id);
         // upon success, update the list of items
         this.setState({ lists: newLists });
       } else {
@@ -173,7 +171,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+
         <div className="container">
           <div>
             <Navbar bg='info' expand="lg">
@@ -205,7 +203,7 @@ class App extends React.Component {
               </Route>
 
               <Route path='/addlist'>
-                <NewList addNewList={(newTitle) => this.addNewList(newTitle)} />
+                <NewList addNewList={(newTitle) => this.addNewList(newTitle)} newList={this.state.newList} />
               </Route>
 
               <Route path='/editlist/:id' render={
@@ -219,20 +217,17 @@ class App extends React.Component {
               
               <div>
                 <div>
-                  <Route path='/login'>
-                    <ValidatedLoginForm />
-                  </Route>
-                  <Route path='/sign-up'>
-                    <SignUp />
-                  </Route>
+                  <Route path='/login' component={ValidatedLoginForm} />
+
+                  <Route path='/sign-up'component={SignupForm} />
                 </div>
               </div>
 
               <Error404View />
 
             </Switch>
+            <Footer />
       </div>
-      </Router>
     );
   }
 }
@@ -244,6 +239,8 @@ class Home extends React.Component {
         <h1>Welcome</h1>
         <div>
               <Button variant="info"><Link to="/login">SIGN IN</Link></Button>
+              <br/>
+              <br/>
               <Button variant="info"><Link to="/sign-up">SIGN UP</Link></Button>
         </div>
       </div>
@@ -251,4 +248,15 @@ class Home extends React.Component {
   }
 }
 
+class Footer extends React.Component {
+  render() {
+    return(
+      <div className="footer">
+
+      <SocialFollow />
+
+      </div>
+    )
+  }
+}
 export default withRouter(App);

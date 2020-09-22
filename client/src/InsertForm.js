@@ -1,11 +1,10 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import FormControl from 'react-bootstrap/FormLabel';
 import Button from 'react-bootstrap/Button';
-// import NavLink from 'react-bootstrap/NavLink';
 
 
 class InsertForm extends React.Component {
@@ -26,8 +25,8 @@ class InsertForm extends React.Component {
         // Pass the state
         event.preventDefault();
         
-        //console.log(this.props.match.path);
-      
+        // console.log(this.props.match.path);
+
         this.props.addNewItem(this.state.newItem, this.props.editedListId);
         // redirect to My lists page
         this.props.history.push('/mylists');
@@ -54,7 +53,7 @@ class InsertForm extends React.Component {
                         </FormLabel>
                         <br/>
                     <Button variant="info" type="submit">Add</Button>
-                    <Button onClick={(e) => this.props.history.push('/mylists')} type="button">Cancel</Button>
+                    <Button type="button"><Link to="/mylists">Cancel</Link></Button>
                     </FormGroup>
                 </Form>
             </div>
