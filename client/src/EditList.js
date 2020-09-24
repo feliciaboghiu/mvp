@@ -5,7 +5,7 @@ class EditList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showInput: false,
+            // showInput: false,
             title: props.list.title
         };
     }
@@ -33,10 +33,10 @@ class EditList extends React.Component {
         }
 
 
-    showInput = (event) => {
-        let boolean = (this.state.showInput = !this.state.showInput);
-        this.setState({ showInput: boolean }) 
-    }
+    // showInput = (event) => {
+    //     let boolean = (this.state.showInput = !this.state.showInput);
+    //     this.setState({ showInput: boolean }) 
+    // }
 
     
     render() {
@@ -67,18 +67,18 @@ class EditList extends React.Component {
                 <div className="itemList">
                     <h2>Edit List</h2> 
 
-                    <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                    <div>
                         <label>Choose one item to edit: </label> 
                     </div>
 
-                    <div className={this.state.showInput ? 'dontshow' : 'show'}>
+                    <div>
                         <h3>
                             {title}
                         </h3>
                     </div>
 
                     <form onSubmit={(e) => this.handleSubmit(e)}>    
-                        <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                        <div>
                             <h3>
                                 <input
                                     name="title"
@@ -94,7 +94,7 @@ class EditList extends React.Component {
                             {listJsx}
                         </ul>
 
-                        <div className={this.state.showInput ? 'show' : 'dontshow'}>
+                        <div>
                             <Button variant="info" type="submit">Save Fields</Button>
                         </div>
                     </form>

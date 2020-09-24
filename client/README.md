@@ -23,5 +23,6 @@ My MVP will be called Inventarium and it's an app about Inventory Management.
 ## Feature Extension - Felicia Boghiu
 - Front-end: reorganize components, buttons/form functionality
 - Back-end ('inventarium' database with two tables: lists and items)
+- Create the client-server connection
 
 _This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._

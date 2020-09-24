@@ -21,6 +21,8 @@ class ValidatedLoginForm extends React.Component {
             onSubmit ={(values, { setSubmitting }) => {
                 setTimeout(() => {
                 console.log("Logging in", values);
+                alert(JSON.stringify(values, null, 2));
+                window.location.href = "/mylists";
                 setSubmitting(false);
             }, 500);
         }} 
@@ -47,7 +49,7 @@ class ValidatedLoginForm extends React.Component {
             } = props;
             return (
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"></label>
                     <input
                         name="email"
                         type="text"

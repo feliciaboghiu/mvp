@@ -30,8 +30,10 @@ class NewList extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Add New List</h2>
+            <div className="text-center">
+            <br/>
+            <br/>
+                <h6>Add a new list:</h6>
                 <Form onSubmit={ (e) => this.handleSubmit2(e) }>
                     <FormGroup>
                     <FormLabel>
@@ -42,9 +44,10 @@ class NewList extends React.Component {
                             value={this.state.newTitle}
                             onChange={e => this.handleChange2(e)}
                         />
+                        
                     </FormLabel>
                     <br/>
-                    <Button variant="info" type="submit">Submit</Button>
+                    <Button variant="info" type="submit"><span role="img" aria-label="sheep">✅</span></Button>
                     </FormGroup>
                 </Form>
             </div>

@@ -23,43 +23,47 @@ class ItemList extends React.Component {
             this.props.lists.map((l) => (
 
                 <Col sm='4' key={l.title}>
-                    <div className="background">
-                        <h3>{l.title}</h3>
+                    <div className="text-center">
+
+                    <br/>
+                        <h5>{l.title}</h5>
 
                             <div>
-                            <div className="white">
-                                <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}>Add Item</Link></Button>
-                                <Button variant="info"><Link to={'/editlist/' + l.id}>Edit</Link></Button>
-                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}>Delete</Button>
+                            <div className="text-center">
+                                <Button variant="info" onClick={() => this.setEditedListId(l.id)}><Link to={'/additem/' + l.id}><span role="img" aria-label="delete">➕</span></Link></Button>
+                                <Button variant="info"><Link to={'/editlist/' + l.id}><span role="img" aria-label="edit">📝</span></Link></Button>
+                                <Button variant="info" onClick={() => this.handleListDelete(l.id)}><span role="img" aria-label="delete">❎</span></Button>
                             </div>
                             </div>
                     </div>
+                    <br/>
+                    <div className="text-center">
                         { 
                             l.items && (
 
                             <ul>
                                 {l.items.map((i) => (
 
-                                <div className="left">
+                                <div>
                                     <li key={i.id}>
                                         {i.text}
-                                        <Button className="btn-sm"
-                                        variant="outline-info"
+                                        <Button variant="info"
                                         onClick={ () => this.props.deleteItem(l.id, i.id) }>
-                                        Delete
+                                        <span role="img" aria-label="delete">❎</span>
                                         </Button>
                                     </li>
                                 </div>))}
                             </ul>
                             )
                         }
+                        </div>
                 </Col>
                 ))
             ) 
 
         return (
             <div>
-                <h2>Item List</h2>
+                {/* <h2>Item List</h2> */}
                 <Row>
                     {listJsx}
                 </Row>

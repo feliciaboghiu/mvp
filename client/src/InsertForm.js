@@ -36,8 +36,10 @@ class InsertForm extends React.Component {
     render() {
             
         return (
-            <div>
-                <h2>Add items</h2>
+            <div className="text-center">
+            <br/>
+            <br/>
+                <h5>Add a new item to your list:</h5>
                 <Form onSubmit={(e) => this.handleSubmit(e)}>
                     <FormGroup>
                         <FormLabel>
@@ -52,8 +54,10 @@ class InsertForm extends React.Component {
                             </FormControl>
                         </FormLabel>
                         <br/>
-                    <Button variant="info" type="submit">Add</Button>
-                    <Button type="button"><Link to="/mylists">Cancel</Link></Button>
+                        <br/>
+                    <Button variant="info" type="submit"><span role="img" aria-label="done">✅</span></Button>
+                    
+                    <Button variant="info" type="submit"><Link to="/mylists"><span role="img" aria-label="back">🔙</span></Link></Button>
                     </FormGroup>
                 </Form>
             </div>

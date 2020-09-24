@@ -56,8 +56,8 @@ class App extends React.Component {
   try {
     let response = await fetch(API_URL2, options);
     if (response.ok) {
-    let newItem = await response.json();
-    this.setState({ text: newItem });
+    let newItems = await response.json();
+    this.setState({ newItems });
     } else {
       console.log("ERROR:", response.status, response.statusText);
       }
@@ -88,6 +88,7 @@ class App extends React.Component {
     } catch (err) {
       console.log("EXCEPTION:", err.message);
     }
+    this.props.history.push('/mylists');
   }
 
   setEditedListId(editedListId) {
@@ -173,11 +174,11 @@ class App extends React.Component {
     return (
 
         <div className="container">
-          <div>
+          <div className="text-center">
             <Navbar bg='info' expand="lg">
-              <Button variant="info"><NavLink to='/' exact><NavbarBrand>INVENTARIUM</NavbarBrand></NavLink></Button>
-              <Button variant="info"><NavLink to='/mylists' exact activeClassName='selected'>My Lists</NavLink></Button>
-              <Button variant="info"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></Button>
+              <button type="button" className="btn"><NavLink to='/' exact><NavbarBrand>INVENTARIUM</NavbarBrand></NavLink></button>
+              <button type="button" className="btn"><Link to='/mylists' exact activeClassName='selected'>My Lists</Link></button>
+              <button type="button" className="btn"><NavLink to='/addlist' activeClassName='selected'>Create New List</NavLink></button>
             </Navbar>
           </div>
               
@@ -236,7 +237,10 @@ class Home extends React.Component {
   render() {
     return(
       <div className="text-center">
-        <h1>Welcome</h1>
+      <br/>
+      <br/>
+        <h5>“For every minute spent organizing, an hour is earned."</h5>
+            <br/>
         <div>
               <Button variant="info"><Link to="/login">SIGN IN</Link></Button>
               <br/>

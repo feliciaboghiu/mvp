@@ -11,14 +11,14 @@ import {
     ViberShareButton,
     WhatsappShareButton
   } from "react-share";
-
+  
 class SocialFollow extends React.Component {
 
     render() {
     
         return (
             <div className="social-container">
-            <h2>Follow us on Social Media</h2>
+            {/* <h2>Follow us on Social Media</h2> */}
             
             <a href="https://www.lifehack.org/articles/productivity/how-organize-your-life-10-habits-really-organized-people.html" className="facebook" />
             <FontAwesomeIcon icon={faFacebook} size="2x" />
@@ -32,8 +32,8 @@ class SocialFollow extends React.Component {
             <a href="https://www.lifehack.org/articles/productivity/how-organize-your-life-10-habits-really-organized-people.html" className="instagram"/>
             <FontAwesomeIcon icon={faInstagram} size="2x" />
 
-
-            <FacebookMessengerShareButton />
+            
+            <p>©Inventarium 2020</p>
 
             </div>
         );

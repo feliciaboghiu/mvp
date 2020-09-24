@@ -28,17 +28,19 @@ const SignupForm = () => {
     onSubmit: async values => {
         await sleep(500);
       alert(JSON.stringify(values, null, 2));
+      window.location.href = "/mylists";
     },
   });
 
   return (
 
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="firstName">First Name</label>
+      <label htmlFor="firstName"></label>
       <input
         id="firstName"
         name="firstName"
         type="text"
+        placeholder="First Name"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.firstName}
@@ -48,11 +50,12 @@ const SignupForm = () => {
         <div>{formik.errors.firstName}</div>
       ) : null}
 
-      <label htmlFor="lastName">Last Name</label>
+      <label htmlFor="lastName"></label>
       <input
         id="lastName"
         name="lastName"
         type="text"
+        placeholder="Last Name"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.lastName}
